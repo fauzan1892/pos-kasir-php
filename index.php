@@ -1,9 +1,5 @@
 
 <?php 
-
-	/*
-	 *	PERINGATAN ! tidak untuk mengubah kode ini, kecuali jika bisa php
-	 */
 	 
 	error_reporting(0);
 	session_start();
@@ -13,13 +9,10 @@
 			require 'config.php';
 			
 			include $view;
-			
-		//class custom pdo ==============================================================
-		 
+		
 			$lihat = new view($config);
 			$toko = $lihat -> toko();
-		//end class custom pdo ===========================================================	
-		 
+		
 			//  admin
 				include 'admin/template/header.php';
 				include 'admin/template/sidebar.php';
