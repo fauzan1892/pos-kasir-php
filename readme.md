@@ -9,7 +9,7 @@ User : admin
 <br/>
 Pass : 123
 
-## Change Logs
+## Changelog
 29 Agustus 2019 <br>
 - laporan tampilan error  -> fixed
 - klik button bayar transaksi  tidak masuk ke laporan -> fixed
