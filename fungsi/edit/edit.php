@@ -28,7 +28,7 @@ if(!empty($_GET['kategori'])){
 	$sql = 'UPDATE kategori SET  nama_kategori=? WHERE id_kategori=?';
 	$row = $config -> prepare($sql);
 	$row -> execute($data);
-	echo '<script>window.location="../../index.php?page=kategori/edit&kategori='.$id.'&success=edit-data"</script>';
+	echo '<script>window.location="../../index.php?page=kategori&uid='.$id.'&success-edit=edit-data"</script>';
 }
 
 if(!empty($_GET['stok'])){

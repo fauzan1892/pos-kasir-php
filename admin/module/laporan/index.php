@@ -27,19 +27,19 @@
 						<form method="post" action="index.php?page=laporan&cari=ok">
 							<table>
 								<tr>
-								<td style="padding-left:2pc;">
+								<td style="padding-left:2pc;padding-bottom:1pc;">
 									Pilih Bulan
 								</td>
-								<td style="padding-left:2pc;">
+								<td style="padding-left:2pc;padding-bottom:1pc;">
 									Pilih Tahun
 								</td>
-								<td style="padding-left:2pc;">
+								<td style="padding-left:2pc;padding-bottom:1pc;">
 									Aksi
 								</td>
 								</tr>
 								<tr>
 								<td style="padding-left:2pc;">
-								<select name="bln">
+								<select name="bln" class="form-control">
 									<option selected="selected">Bulan</option>
 									<?php
 									$bulan=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
@@ -55,7 +55,7 @@
 								<td style="padding-left:2pc;">
 								<?php
 									$now=date('Y');
-									echo "<select name='thn'>";
+									echo "<select name='thn' class='form-control'>";
 									echo '
 									<option selected="selected">Tahun</option>';
 									for ($a=2017;$a<=$now;$a++)
@@ -68,7 +68,7 @@
 								<td style="padding-left:2pc;">
 									<input type="hidden" name="periode" value="ya">
 									<button class="btn btn-primary">
-										Cari
+										<i class="fa fa-search"></i> Cari
 									</button>
 								</td>
 								</tr>
@@ -88,13 +88,13 @@
 							<table class="table table-bordered" id="example1">
 								<thead>
 									<tr>
-										<td> No</td>
-										<td> ID Barang</td>
-										<td> Nama Barang</td>
-										<td style="width:10%;"> Jumlah</td>
-										<td style="width:20%;"> Total</td>
-										<td> Kasir</td>
-										<td> Tanggal Input</td>
+										<th> No</th>
+										<th> ID Barang</th>
+										<th> Nama Barang</th>
+										<th style="width:10%;"> Jumlah</th>
+										<th style="width:20%;"> Total</th>
+										<th> Kasir</th>
+										<th> Tanggal Input</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -116,12 +116,16 @@
 										<td><?php echo $isi['tanggal_input'];?></td>
 									</tr>
 									<?php $no++; }?>
+									<?php $hasil = $lihat -> jumlah_nota(); ?>
 								</tbody>
+								<tfoot>
+									<tr>
+										<th colspan="4">Pemasukan</td>
+										<th>Rp.<?php echo number_format($bayar);?>,-</td>
+										<th colspan="2" style="background:#ddd"></th>
+									</tr>
+								</tfoot>
 							</table>
-							<h3>
-								<?php $hasil = $lihat -> jumlah_nota(); ?>
-								Pemasukan : Rp.<?php echo number_format($bayar);?>,-
-							</h3>
 							<div class="clearfix" style="padding-top:27%;"></div>
 						</div>
 						<?php }else{?>
@@ -130,13 +134,13 @@
 							<table class="table table-bordered" id="example1">
 								<thead>
 									<tr>
-										<td> No</td>
-										<td> ID Barang</td>
-										<td> Nama Barang</td>
-										<td style="width:10%;"> Jumlah</td>
-										<td style="width:20%;"> Total</td>
-										<td> Kasir</td>
-										<td> Tanggal Input</td>
+										<th> No</th>
+										<th> ID Barang</th>
+										<th> Nama Barang</th>
+										<th style="width:10%;"> Jumlah</th>
+										<th style="width:20%;"> Total</th>
+										<th> Kasir</th>
+										<th> Tanggal Input</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -156,12 +160,16 @@
 										<td><?php echo $isi['tanggal_input'];?></td>
 									</tr>
 									<?php $no++; }?>
+									<?php $hasil = $lihat -> jumlah_nota(); ?>
 								</tbody>
+								<tfoot>
+									<tr>
+										<th colspan="4">Pemasukan</td>
+										<th>Rp.<?php echo number_format($bayar);?>,-</td>
+										<th colspan="2" style="background:#ddd"></th>
+									</tr>
+								</tfoot>
 							</table>
-							<h3>
-								<?php $hasil = $lihat -> jumlah_nota(); ?>
-								Pemasukan : Rp.<?php echo number_format($bayar);?>,-
-							</h3>
 							<div class="clearfix" style="padding-top:27%;"></div>
 						</div>
 						<?php }?>

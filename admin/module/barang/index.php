@@ -4,7 +4,6 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <div class="bg-shadow" style="background:rgba(0,0,0,0.3);z-index:99999;position:fixed;width:100%;height:6000px;"></div>
       <section id="main-content">
           <section class="wrapper">
 
@@ -28,7 +27,10 @@
 						<?php }?>
 						<table>
 							<tr>
-								<td><button id="tombol-simpan" onclick="clickModals()" class="btn btn-primary"><i class="fa fa-plus"></i> Insert Data</button></td>
+								<td>
+									<!-- Trigger the modal with a button -->
+									<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Insert Data</button>
+								</td>
 							</tr>
 						</table>
 						<br/>
@@ -97,19 +99,20 @@
 						</div>
 					<!-- end view barang -->
 					<!-- tambah barang MODALS-->
-					<div class="modal-create" style="z-index:9999999;position:absolute;margin:0 auto;padding:0;top:0;width:85%;">
-						<div class="panel panel-default" style="border:0px;">
-							<div class="panel-heading">
-								<h4><i class="fa fa-user-plus"></i>  Tambah Barang
-									<a class="pull-right">
-										<button type="submit" class="btn btn-danger" onclick="cancelModals()" id="batal">Batal</button>
-									</a>
-								</h4>
-							</div>
-							<div class="panel-body">
-								<div class="box-content">
-									<table class="table table-striped bordered">
-										<form action="fungsi/tambah/tambah.php?barang=tambah" method="POST">
+						<!-- Modal -->
+						<div id="myModal" class="modal fade" role="dialog">
+							<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Tambah Barang</h4>
+								</div>										
+								<form action="fungsi/tambah/tambah.php?barang=tambah" method="POST">
+									<div class="modal-body">
+								
+										<table class="table table-striped bordered">
 											
 											<?php
 												$format = $lihat -> barang_id();
@@ -166,14 +169,16 @@
 												<td></td>
 												<td><button class="btn btn-primary"><i class="fa fa-plus"></i> Insert Data</button></td>
 											</tr>
-										</form>
-									</table>
-								</div>
+										</table>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</form>
 							</div>
-						<!-- end tambah barang -->
+						</div>
 					</div>
-				  </div>
-              </div>
-          </section>
-      </section>
+              	</div>
+          	</section>
+      	</section>
 	
