@@ -126,6 +126,7 @@
 													$row = $config->prepare($sql);
 													$row->execute($d);
 												}
+												echo '<script>alert("Belanjaan Berhasil Di Bayar !");</script>';
 											}
 											?>
 											<form method="POST" action="index.php?page=jual&nota=yes#kasirnya">
