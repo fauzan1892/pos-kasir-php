@@ -4,7 +4,7 @@
 	error_reporting(0);
 	session_start();
 
-		 if($_SESSION['admin']){
+		 if(!empty($_SESSION['admin'])){
 			
 			require 'config.php';
 			
