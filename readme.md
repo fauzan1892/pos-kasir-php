@@ -9,12 +9,20 @@ User : admin
 <br/>
 Pass : 123
 
+## Contoh Program 
+- Login
+<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/login.png">
+
 ## Changelog
 
 06 Oktober 2020<br>
 - revisi session error pada hosting dengan error : 
 Warning: session_start(): Cannot send session cookie - headers already sent by (output started at [duplicate] -> fixed
-
+- Ganti background login, header
+- Ganti Header table barang, table keranjang, table laporan
+- Fix transaksi -> transaksi stok < keranjang tidak bisa diproses
+- penghapusan trigger sql
+- penambahan fungsi transaksi untuk pengurangan stok barang setelah transaksi bayar 
 
 23 Agustus 2020<br>
 - revisi print
