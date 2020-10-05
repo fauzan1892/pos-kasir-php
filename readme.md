@@ -13,7 +13,7 @@ Pass : 123
 
 06 Oktober 2020<br>
 - revisi session error pada hosting dengan error : 
-Warning: session_start(): Cannot send session cookie - headers already sent by (output started at [duplicate] -> fix 
+Warning: session_start(): Cannot send session cookie - headers already sent by (output started at [duplicate] -> fixed
 
 
 23 Agustus 2020<br>
