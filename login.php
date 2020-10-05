@@ -21,7 +21,7 @@
 			echo '<script>alert("Login Gagal");history.go(-1);</script>';
 		}
 	}
-	?>
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,7 +49,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body style="background:#004643;color:#fff;">
 
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
@@ -64,7 +64,7 @@
 		            <br>
 		            <input type="password" class="form-control" name="pass" placeholder="Password">
 		            <br>
-		            <button class="btn btn-theme btn-block" name="proses" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+		            <button class="btn btn-primary btn-block" name="proses" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		        </div>
 		      </form>	  	
 	  	
@@ -73,15 +73,6 @@
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-
-    <!--BACKSTRETCH-->
-    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-    <script>
-        $.backstretch("assets/img/Green-Branch-Background_1024.jpg", {speed: 500});
-    </script>
-
-
   </body>
 </html>
 

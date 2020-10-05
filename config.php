@@ -1,7 +1,7 @@
 <?php
 
 date_default_timezone_set("Asia/Jakarta");
-error_reporting(0);
+error_reporting(2);
 
 	$user = 'root'; $pass = '';
 	try{

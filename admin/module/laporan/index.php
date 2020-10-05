@@ -87,7 +87,7 @@
 						<div class="modal-view">
 							<table class="table table-bordered" id="example1">
 								<thead>
-									<tr>
+									<tr style="background:#DFF0D8;color:#333;">
 										<th> No</th>
 										<th> ID Barang</th>
 										<th> Nama Barang</th>
@@ -133,7 +133,7 @@
 						<div class="modal-view">
 							<table class="table table-bordered" id="example1">
 								<thead>
-									<tr>
+									<tr style="background:#DFF0D8;color:#333;">
 										<th> No</th>
 										<th> ID Barang</th>
 										<th> Nama Barang</th>
@@ -164,7 +164,7 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<th colspan="4">Pemasukan</td>
+										<th colspan="4">Total Pemasukan</td>
 										<th>Rp.<?php echo number_format($bayar);?>,-</td>
 										<th colspan="2" style="background:#ddd"></th>
 									</tr>

@@ -10,6 +10,7 @@
               <div class="row">
                   <div class="col-lg-12 main-chart">
 						<h3>Data Kategori</h3>
+						<br/>
 						<?php if(isset($_GET['success'])){?>
 						<div class="alert alert-success">
 							<p>Tambah Data Berhasil !</p>
@@ -38,7 +39,7 @@
 									<td style="width:15pc;"><input type="text" class="form-control" value="<?= $edit['nama_kategori'];?>" required name="kategori" placeholder="Masukan Kategori Barang Baru">
 										<input type="hidden" name="id" value="<?= $edit['id_kategori'];?>">
 									</td>
-									<td><button id="tombol-simpan" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah Data</button></td>
+									<td style="padding-left:10px;"><button id="tombol-simpan" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah Data</button></td>
 								</tr>
 							</table>
 						</form>
@@ -47,7 +48,7 @@
 							<table>
 								<tr>
 									<td style="width:15pc;"><input type="text" class="form-control" required name="kategori" placeholder="Masukan Kategori Barang Baru"></td>
-									<td><button id="tombol-simpan" class="btn btn-primary"><i class="fa fa-plus"></i> Insert Data</button></td>
+									<td style="padding-left:10px;"><button id="tombol-simpan" class="btn btn-primary"><i class="fa fa-plus"></i> Insert Data</button></td>
 								</tr>
 							</table>
 						</form>
@@ -56,10 +57,10 @@
 						<table class="table table-bordered" id="example1">
 							<thead>
 								<tr style="background:#DFF0D8;color:#333;">
-									<td>No.</td>
-									<td>Kategori</td>
-									<td>Tanggal Input</td>
-									<td>Aksi</td>
+									<th>No.</th>
+									<th>Kategori</th>
+									<th>Tanggal Input</th>
+									<th>Aksi</th>
 								</tr>
 							</thead>
 							<tbody>

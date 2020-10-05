@@ -1,7 +1,7 @@
-
 <?php 
+session_start();
+if(!empty($_SESSION['admin'])){
 	require '../../config.php';
-
 	if(!empty($_GET['kategori'])){
 		$nama= $_POST['kategori'];
 		$tgl= date("j F Y, G:i");
@@ -55,5 +55,4 @@
 		$row1 -> execute($data1);
  		echo '<script>window.location="../../index.php?page=jual&success=tambah-data"</script>';
 	}
-?>
-
+}

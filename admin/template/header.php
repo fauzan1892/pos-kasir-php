@@ -27,7 +27,7 @@
         <script type="text/javascript" src="assets/datatables/dataTables.bootstrap.js"></script>
         <script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
     <style>
-		.header{background:#53B773; color:#fff;}
+		.header{background:#328f6b; color:#fff;}
 		#main-content{ background:#fff;}
 		#hidden {display:none}
 	</style>

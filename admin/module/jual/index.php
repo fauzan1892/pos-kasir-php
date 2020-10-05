@@ -23,17 +23,17 @@
 							<p>Hapus Data Berhasil !</p>
 						</div>
 						<?php }?>
-						<div class="col-sm-5">
+						<div class="col-sm-4">
 							<div class="panel panel-info">
 								<div class="panel-heading">
 									<h4><i class="fa fa-search"></i> Cari Barang</h4>
 								</div>
 								<div class="panel-body">
-									<input type="text" id="cari" class="form-control" name="cari" placeholder="Masukan Nama Barang / Kode Barang">
+									<input type="text" id="cari" class="form-control" name="cari" placeholder="Masukan : Kode / Nama Barang  [ENTER]">
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-8">
 							<div class="panel panel-info">
 								<div class="panel-heading">
 									<h4><i class="fa fa-list"></i> Hasil Pencarian</h4>
@@ -50,10 +50,9 @@
 						<div class="col-sm-12">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
-									<h4><i class="fa fa-shopping-cart"></i> Kasir
-									<a class="pull-right" href="fungsi/hapus/hapus.php?penjualan=jual">
-										<button class="btn btn-danger">RESET</button>
-									</a>
+									<h4><i class="fa fa-shopping-cart"></i> KASIR
+									<a class="btn btn-danger pull-right" style="margin-top:-0.5pc;" href="fungsi/hapus/hapus.php?penjualan=jual">
+										<b>RESET KERANJANG</b></a>
 									</h4>
 								</div>
 								<div class="panel-body">
@@ -90,11 +89,10 @@
 													<td>Rp.<?php echo number_format($isi['total']);?>,-</td>
 													<td><?php echo $isi['nm_member'];?></td>
 													<td>
-															<button class="btn btn-warning">Update</button>
+															<button type="submit" class="btn btn-warning">Update</button>
 														</form>
 														<a href="fungsi/hapus/hapus.php?jual=jual&id=<?php echo $isi['id_penjualan'];?>&brg=<?php echo $isi['id_barang'];?>
-														&jml=<?php echo $isi['jumlah']; ?>">
-															<button class="btn btn-danger">x</button>
+														&jml=<?php echo $isi['jumlah']; ?>"  class="btn btn-danger"><i class="fa fa-times"></i>
 														</a>
 													</td>
 												</tr>
@@ -106,27 +104,51 @@
 									<div id="kasirnya">
 										<table class="table table-stripped">
 											<?php
+											// proses bayar dan ke nota
+											if(!empty($_GET['nota'] == 'yes')) {
 												$total = $_POST['total'];
 												$bayar = $_POST['bayar'];
-												$hitung = $bayar - $total;
-											if(!empty($_GET['nota'])){
-												
-												$id_barang = $_POST['id_barang'];
-												$id_member = $_POST['id_member'];
-												$jumlah = $_POST['jumlah'];
-												$total = $_POST['total1'];
-												$tgl_input = $_POST['tgl_input'];
-												$periode = $_POST['periode'];
-												$jumlah_dipilih = count($id_barang);
-												
-												for($x=0;$x<$jumlah_dipilih;$x++){
-													$d = array($id_barang[$x],$id_member[$x],$jumlah[$x],$total[$x],$tgl_input[$x],$periode[$x]);
+												if(!empty($bayar))
+												{
+													$hitung = $bayar - $total;
+													if($bayar >= $total)
+													{
+														$id_barang = $_POST['id_barang'];
+														$id_member = $_POST['id_member'];
+														$jumlah = $_POST['jumlah'];
+														$total = $_POST['total1'];
+														$tgl_input = $_POST['tgl_input'];
+														$periode = $_POST['periode'];
+														$jumlah_dipilih = count($id_barang);
+														
+														for($x=0;$x<$jumlah_dipilih;$x++){
 
-													$sql = "INSERT INTO nota (id_barang,id_member,jumlah,total,tanggal_input,periode) VALUES(?,?,?,?,?,?)";
-													$row = $config->prepare($sql);
-													$row->execute($d);
+															$d = array($id_barang[$x],$id_member[$x],$jumlah[$x],$total[$x],$tgl_input[$x],$periode[$x]);
+															$sql = "INSERT INTO nota (id_barang,id_member,jumlah,total,tanggal_input,periode) VALUES(?,?,?,?,?,?)";
+															$row = $config->prepare($sql);
+															$row->execute($d);
+
+															// ubah stok barang
+															$sql_barang = "SELECT * FROM barang WHERE id_barang = ?";
+															$row_barang = $config->prepare($sql_barang);
+															$row_barang->execute(array($id_barang[$x]));
+															$hsl = $row_barang->fetch();
+															
+															$stok = $hsl['stok'];
+															$idb  = $hsl['id_barang'];
+
+															$total_stok = $stok - $jumlah[$x];
+															echo $total_stok;
+															$sql_stok = "UPDATE barang SET stok = ? WHERE id_barang = ?";
+															$row_stok = $config->prepare($sql_stok);
+															$row_stok->execute(array($total_stok, $idb));
+															
+														}
+														echo '<script>alert("Belanjaan Berhasil Di Bayar !");</script>';
+													}else{
+														echo '<script>alert("Uang Kurang ! Rp.'.$hitung.'");</script>';
+													}
 												}
-												echo '<script>alert("Belanjaan Berhasil Di Bayar !");</script>';
 											}
 											?>
 											<form method="POST" action="index.php?page=jual&nota=yes#kasirnya">
@@ -145,7 +167,10 @@
 												
 													<td>Bayar  </td>
 													<td><input type="text" class="form-control" name="bayar" value="<?php echo $bayar;?>"></td>
-													<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button></td>
+													<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
+													<?php  if(!empty($_GET['nota'] == 'yes')) {?>
+													 <a class="btn btn-danger" href="fungsi/hapus/hapus.php?penjualan=jual">
+														<b>RESET</b></a></td><?php }?></td>
 												</tr>
 											</form>
 											<tr>
@@ -177,7 +202,7 @@
 <script>
 // AJAX call for autocomplete 
 $(document).ready(function(){
-	$("#cari").keyup(function(){
+	$("#cari").change(function(){
 		$.ajax({
 		type: "POST",
 		url: "fungsi/edit/edit.php?cari_barang=yes",

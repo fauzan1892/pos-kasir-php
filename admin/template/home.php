@@ -54,7 +54,7 @@
 									<center><h1><?php echo $hasil_barang;?></h1></center>
 								</div>
 								<div class="panel-footer">
-									<h4 style="font-size:15px;"><a href='index.php?page=barang'>Tabel Barang <i class='fa fa-arrow-right'></i></a></h4>
+									<h4 style="font-size:15px;font-weight:700;"><a href='index.php?page=barang'>Tabel Barang <i class='fa fa-angle-double-right'></i></a></h4>
 								</div>
 	                      	</div><!--/grey-panel -->
                       	</div><!-- /col-md-3-->
@@ -68,7 +68,7 @@
 									<center><h1><?php echo $stok['jml'];?></h1></center>
 								</div>
 								<div class="panel-footer">
-									<h4 style="font-size:15px;"><a href='index.php?page=barang'>Tabel Barang <i class='fa fa-arrow-right'></i></a></h4>
+									<h4 style="font-size:15px;font-weight:700;"><a href='index.php?page=barang'>Tabel Barang  <i class='fa fa-angle-double-right'></i></a></h4>
 								</div>
 	                      	</div><!--/grey-panel -->
                       	</div><!-- /col-md-3-->
@@ -82,7 +82,7 @@
 									<center><h1><?php echo $jual['stok'];?></h1></center>
 								</div>
 								<div class="panel-footer">
-									<h4 style="font-size:15px;"><a href='index.php?page=laporan'>Tabel laporan <i class='fa fa-arrow-right'></i></a></h4>
+									<h4 style="font-size:15px;font-weight:700;font-weight:700;"><a href='index.php?page=laporan'>Tabel laporan  <i class='fa fa-angle-double-right'></i></a></h4>
 								</div>
 	                      	</div><!--/grey-panel -->
                       	</div><!-- /col-md-3-->
@@ -95,15 +95,10 @@
 									<center><h1><?php echo $hasil_kategori;?></h1></center>
 								</div>
 								<div class="panel-footer">
-									<h4 style="font-size:15px;"><a href='index.php?page=kategori'>Tabel Kategori <i class='fa fa-arrow-right'></i></a></h4>
+									<h4 style="font-size:15px;font-weight:700;"><a href='index.php?page=kategori'>Tabel Kategori  <i class='fa fa-angle-double-right'></i></a></h4>
 								</div>
 	                      	</div><!--/grey-panel -->
                       	</div><!-- /col-md-3-->
-						
-                      	<?php $hasil = $lihat -> jumlah_nota(); ?>
-						<h3> Pemasukan Uang : Rp.<?php echo number_format($hasil['bayar']);?>,-</h3>
-						<?php  $c = $lihat -> jml(); ?>
-						<h3> Pengeluaran Uang ( Modal ) : Rp.<?php echo number_format($c['byr']);?>,-</h3>
 					</div>
 				</div>
            </div><!-- /col-lg-9 END SECTION MIDDLE -->

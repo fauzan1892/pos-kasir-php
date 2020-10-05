@@ -142,7 +142,8 @@
 				$sql ="SELECT nota.* , barang.id_barang, barang.nama_barang, member.id_member,
 						member.nm_member from nota 
 					   left join barang on barang.id_barang=nota.id_barang 
-					   left join member on member.id_member=nota.id_member";
+					   left join member on member.id_member=nota.id_member 
+					   ORDER BY id_nota DESC";
 				$row = $this-> db -> prepare($sql);
 				$row -> execute();
 				$hasil = $row -> fetchAll();
