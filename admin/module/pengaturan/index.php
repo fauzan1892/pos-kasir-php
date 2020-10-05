@@ -10,6 +10,7 @@
               <div class="row">
                   <div class="col-lg-12 main-chart">
 						<h3>Pengaturan Toko</h3>
+						<br>
 						<?php if(isset($_GET['success'])){?>
 						<div class="alert alert-success">
 							<p>Ubah Data Berhasil !</p>

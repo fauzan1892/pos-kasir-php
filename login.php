@@ -58,7 +58,7 @@
 	  <div id="login-page" style="padding-top:3pc;">
 	  	<div class="container">
 		      <form class="form-login" method="POST">
-		        <h2 class="form-login-heading">sign in now</h2>
+		        <h2 class="form-login-heading">Aplikasi POS</h2>
 		        <div class="login-wrap">
 		            <input type="text" class="form-control" name="user" placeholder="User ID" autofocus>
 		            <br>

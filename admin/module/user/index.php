@@ -13,6 +13,7 @@
               <div class="row">
                   <div class="col-lg-12 main-chart">
 						<h3>Profil Pengguna Aplikasi</h3>
+						<br>
 						<?php if(isset($_GET['success'])){?>
 						<div class="alert alert-success">
 							<p>Edit Data Berhasil !</p>
