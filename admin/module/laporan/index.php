@@ -9,50 +9,46 @@
 
               <div class="row">
                   <div class="col-lg-12 main-chart">
-						<h3>Data Laporan
+						<h3>Data Laporan Penjualan
 							<!--<a  style="padding-left:2pc;" href="fungsi/hapus/hapus.php?laporan=jual" onclick="javascript:return confirm('Data Laporan akan di Hapus ?');">
 								<button class="btn btn-danger">RESET</button>
 							</a>-->
 							<?php if(!empty($_GET['cari'])){
-								echo 'Periode Bulan ke - '.$_POST['bln'].'/'.$_POST['thn'];
+								echo 'Periode Bulan ke - '.$_POST['bln'].' Tahun '.$_POST['thn'];
 							}
 							?>
-							
-							<a style="padding-left:2pc;" href="index.php?page=laporan">
-								<button class="btn btn-success">Refresh</button></a>
 						</h3>
 						<br/>
-						<h4>Cari Laporan Per Perbulan</h4>
-						<br/>
+						<h4>Cari Laporan Per Bulan</h4>
 						<form method="post" action="index.php?page=laporan&cari=ok">
-							<table>
+							<table class="table table-striped">
 								<tr>
-								<td style="padding-left:2pc;padding-bottom:1pc;">
-									Pilih Bulan
-								</td>
-								<td style="padding-left:2pc;padding-bottom:1pc;">
-									Pilih Tahun
-								</td>
-								<td style="padding-left:2pc;padding-bottom:1pc;">
-									Aksi
-								</td>
+									<th>
+										Pilih Bulan
+									</th>
+									<th>
+										Pilih Tahun
+									</th>
+									<th>
+										Aksi
+									</th>
 								</tr>
 								<tr>
-								<td style="padding-left:2pc;">
+								<td>
 								<select name="bln" class="form-control">
 									<option selected="selected">Bulan</option>
 									<?php
-									$bulan=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
-									$jlh_bln=count($bulan);
-									$bln1 = array('01','02','03','04','05','06','07','08','09','10','11','12');
-									$no=1;
-									for($c=0; $c<$jlh_bln; $c+=1){
-										echo"<option value='$bln1[$c]'> $bulan[$c] </option>";
-									$no++;}
+										$bulan=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+										$jlh_bln=count($bulan);
+										$bln1 = array('01','02','03','04','05','06','07','08','09','10','11','12');
+										$no=1;
+										for($c=0; $c<$jlh_bln; $c+=1){
+											echo"<option value='$bln1[$c]'> $bulan[$c] </option>";
+										$no++;}
 									?>
 									</select>
 								</td>
-								<td style="padding-left:2pc;">
+								<td>
 								<?php
 									$now=date('Y');
 									echo "<select name='thn' class='form-control'>";
@@ -65,23 +61,20 @@
 									echo "</select>";
 									?>
 								</td>
-								<td style="padding-left:2pc;">
+								<td>
 									<input type="hidden" name="periode" value="ya">
 									<button class="btn btn-primary">
 										<i class="fa fa-search"></i> Cari
 									</button>
+									<a href="index.php?page=laporan" class="btn btn-success">
+										<i class="fa fa-refresh"></i> Refresh</a>
 								</td>
 								</tr>
 							</table>
 						</form>
+						<div class="clearfix" style="border-top:1px solid #ccc;"></div>
 						<br/>
 						<br/>
-						<?php if(isset($_GET['remove'])){?>
-						<div class="alert alert-danger">
-							<p>Hapus Data Berhasil !</p>
-						</div>
-						<?php }?>
-						
 						<?php if(!empty($_GET['cari'])){?>
 						<!-- view barang -->	
 						<div class="modal-view">
@@ -101,10 +94,12 @@
 									<?php 
 										$periode = $_POST['bln'].'-'.$_POST['thn'];
 										$no=1; 
+										$jumlah = 0;
 										$bayar = 0;
 										$hasil = $lihat -> periode_jual($periode);
 										foreach($hasil as $isi){
 											$bayar += $isi['total'];
+											$jumlah += $isi['jumlah'];
 									?>
 									<tr>
 										<td><?php echo $no;?></td>
@@ -120,13 +115,13 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<th colspan="4">Pemasukan</td>
+										<th colspan="3">Total Terjual</td>
+										<th><?php echo $jumlah;?></td>
 										<th>Rp.<?php echo number_format($bayar);?>,-</td>
 										<th colspan="2" style="background:#ddd"></th>
 									</tr>
 								</tfoot>
 							</table>
-							<div class="clearfix" style="padding-top:27%;"></div>
 						</div>
 						<?php }else{?>
 						<!-- view barang -->	
@@ -146,9 +141,11 @@
 								<tbody>
 									<?php $no=1; $hasil = $lihat -> jual();?>
 									<?php 
-									$bayar = 0;
-									foreach($hasil as $isi){ 
+										$bayar = 0;
+										$jumlah = 0;
+										foreach($hasil as $isi){ 
 											$bayar += $isi['total'];
+											$jumlah += $isi['jumlah'];
 									?>
 									<tr>
 										<td><?php echo $no;?></td>
@@ -164,15 +161,16 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<th colspan="4">Total Pemasukan</td>
+										<th colspan="3">Total Terjual</td>
+										<th><?php echo $jumlah;?></td>
 										<th>Rp.<?php echo number_format($bayar);?>,-</td>
 										<th colspan="2" style="background:#ddd"></th>
 									</tr>
 								</tfoot>
 							</table>
-							<div class="clearfix" style="padding-top:27%;"></div>
 						</div>
 						<?php }?>
+							<div class="clearfix" style="padding-top:5pc;"></div>
 					</div>
 				  </div>
               </div>

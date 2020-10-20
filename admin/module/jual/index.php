@@ -25,7 +25,7 @@
 						</div>
 						<?php }?>
 						<div class="col-sm-4">
-							<div class="panel panel-info">
+							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<h4><i class="fa fa-search"></i> Cari Barang</h4>
 								</div>
@@ -35,7 +35,7 @@
 							</div>
 						</div>
 						<div class="col-sm-8">
-							<div class="panel panel-info">
+							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<h4><i class="fa fa-list"></i> Hasil Pencarian</h4>
 								</div>

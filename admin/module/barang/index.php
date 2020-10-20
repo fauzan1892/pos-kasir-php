@@ -40,18 +40,23 @@
 										<th>ID Barang</th>
 										<th>Kategori</th>
 										<th>Nama Barang</th>
-										<th>Merk Barang</th>
+										<th>Merk</th>
+										<th>Harga Beli</th>
 										<th>Harga Jual</th>
-										<th>Satuan Barang</th>
 										<th>Stok</th>
+										<th>Satuan</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
+
 								<?php 
+									$totalBeli = 0;
+									$totalJual = 0;
+									$totalStok = 0;
 									$hasil = $lihat -> barang();
 									$no=1;
-									foreach($hasil as $isi){
+									foreach($hasil as $isi) {
 								?>
 									<tr>
 										<td><?php echo $no;?></td>
@@ -59,8 +64,8 @@
 										<td><?php echo $isi['nama_kategori'];?></td>
 										<td><?php echo $isi['nama_barang'];?></td>
 										<td><?php echo $isi['merk'];?></td>
+										<td>Rp.<?php echo number_format($isi['harga_beli']);?>,-</td>
 										<td>Rp.<?php echo number_format($isi['harga_jual']);?>,-</td>
-										<td> <?php echo $isi['satuan_barang'];?></td>
 										<td>
 											<?php if($isi['stok'] == '0'){?>
 												<button class="btn btn-danger"> Habis</button>
@@ -68,6 +73,7 @@
 												<?php echo $isi['stok'];?>
 											<?php }?>
 										</td>
+										<td> <?php echo $isi['satuan_barang'];?></td>
 										<td>
 											
 											<?php if($isi['stok'] <=  '3'){?>
@@ -79,22 +85,27 @@
 													</button>
 												</form>
 											<?php }else{?>
-											<a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-primary">Details</button></a>
-											<a href="index.php?page=barang/edit&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-warning">Edit</button></a>
-											<a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>" onclick="javascript:return confirm('Hapus Data barang ?');"><button class="btn btn-danger">Hapus</button></a>
+											<a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-primary btn-xs">Details</button></a>
+											<a href="index.php?page=barang/edit&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-warning btn-xs">Edit</button></a>
+											<a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>" onclick="javascript:return confirm('Hapus Data barang ?');"><button class="btn btn-danger btn-xs">Hapus</button></a>
 											<?php }?>
 										</td>
 									</tr>
-								<?php $no++; }?>
+								<?php 
+										$no++; 
+										$totalBeli += $isi['harga_beli']; 
+										$totalJual += $isi['harga_jual'];
+										$totalStok += $isi['stok'];
+									}
+								?>
 								</tbody>
 								<tfoot>
-								<?php 
-									$c = $lihat -> jml();
-								?>
 									<tr>
-										<th colspan="5">Total Pengeluaran ( modal )</td>
-										<th>Rp.<?php echo number_format($c['byr']);?>,-</td>
-										<th colspan="3" style="background:#ddd"></th>
+										<th colspan="5">Total </td>
+										<th>Rp.<?php echo number_format($totalBeli);?>,-</td>
+										<th>Rp.<?php echo number_format($totalJual);?>,-</td>
+										<th><?php echo $totalStok;?></td>
+										<th colspan="2" style="background:#ddd"></th>
 									</tr>
 								</tfoot>
 							</table>
