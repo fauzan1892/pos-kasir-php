@@ -12,33 +12,23 @@
 					<div class="row" style="margin-left:1pc;margin-right:1pc;">
 				  <h1>DASHBOARD</h1>
 				  <hr>
-				   <?php 
-						$sql=" select * from barang where stok <=3";
+				   
+				  <?php 
+						$sql=" select * from barang where stok <= 3";
 						$row = $config -> prepare($sql);
 						$row -> execute();
-						$q = $row -> fetch();
-							if($q['stok'] == 3){	
-							if($q['stok'] == 2){	
-							if($q['stok'] == 1){	
-								?>	
-								<script>
-									$(document).ready(function(){
-										$('#pesan_sedia').css("color","red");
-										$('#pesan_sedia').append("<span class='glyphicon glyphicon-asterisk'></span>");
-									});
-								</script>
-								<?php
-								echo "
-								<br/>
-								<div class='col-sm-12'>
-									<div style='padding:5px;' class='alert alert-warning'>
-										<span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $q['nama_barang']."</a> yang tersisa sudah kurang dari 3 . silahkan pesan lagi !!
-										<span class='pull-right'><a href='index.php?page=barang'>Tabel Barang <i class='fa fa-arrow-right'></i></a></span>
-									</div>
-								</div>
-								";	
-							}}}
-						?>
+						$r = $row -> fetchAll();
+						foreach($r as $q){
+					?>	
+					<?php
+							echo "
+							<div class='alert alert-warning'>
+								<span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $q['nama_barang']."</a>  / <span style='color:red'> ID ". $q['id_barang']."</span> yang tersisa sudah kurang dari 3 . silahkan pesan lagi !!
+								<span class='pull-right'><a href='index.php?page=barang'>Tabel Barang <i class='fa fa-angle-double-right'></i></a></span>
+							</div>
+							";	
+						}
+					?>
 				  <?php $hasil_barang = $lihat -> barang_row();?>
 				  <?php $hasil_kategori = $lihat -> kategori_row();?>
 				  <?php $stok = $lihat -> barang_stok_row();?>

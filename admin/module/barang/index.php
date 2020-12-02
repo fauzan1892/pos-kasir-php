@@ -26,6 +26,23 @@
 							<p>Hapus Data Berhasil !</p>
 						</div>
 						<?php }?>
+
+						<?php 
+							$sql1=" select * from barang where stok <= 3";
+							$row1 = $config -> prepare($sql1);
+							$row1 -> execute();
+							$r = $row1 -> fetchAll();
+							foreach($r as $q){
+						?>	
+						<?php
+								echo "
+								<div class='alert alert-warning'>
+									<span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $q['nama_barang']."</a>  / <span style='color:red'> ID ". $q['id_barang']."</span> yang tersisa sudah kurang dari 3 . silahkan pesan lagi !!
+								</div>
+								";	
+							}
+						?>
+						
 						<!-- Trigger the modal with a button -->
 						<button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal">
 							<i class="fa fa-plus"></i> Insert Data</button>
