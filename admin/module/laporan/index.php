@@ -144,7 +144,7 @@
 										$bayar = 0;
 										$jumlah = 0;
 										foreach($hasil as $isi){ 
-											$bayar += $isi['total'];
+											$bayar += $isi['total'] * $isi['jumlah'];
 											$jumlah += $isi['jumlah'];
 									?>
 									<tr>
