@@ -26,13 +26,13 @@
 							<p>Hapus Data Berhasil !</p>
 						</div>
 						<?php }?>
-
+						
 						<?php 
 							$sql1=" select * from barang where stok <= 3";
 							$row1 = $config -> prepare($sql1);
 							$row1 -> execute();
 							$r = $row1 -> fetchAll();
-							foreach($r as $q){
+							foreach($r as $q) {
 						?>	
 						<?php
 								echo "
@@ -42,12 +42,14 @@
 								";	
 							}
 						?>
-						
+
 						<!-- Trigger the modal with a button -->
+						<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
 						<button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal">
 							<i class="fa fa-plus"></i> Insert Data</button>
 						<div class="clearfix"></div>
 						<br/>
+						<?php }?>
 						<!-- view barang -->	
 						<div class="modal-view">
 							<table class="table table-bordered table-striped" id="example1">
@@ -58,9 +60,9 @@
 										<th>Kategori</th>
 										<th>Nama Barang</th>
 										<th>Merk</th>
+										<th>Stok</th>
 										<th>Harga Beli</th>
 										<th>Harga Jual</th>
-										<th>Stok</th>
 										<th>Satuan</th>
 										<th>Aksi</th>
 									</tr>
@@ -81,8 +83,6 @@
 										<td><?php echo $isi['nama_kategori'];?></td>
 										<td><?php echo $isi['nama_barang'];?></td>
 										<td><?php echo $isi['merk'];?></td>
-										<td>Rp.<?php echo number_format($isi['harga_beli']);?>,-</td>
-										<td>Rp.<?php echo number_format($isi['harga_jual']);?>,-</td>
 										<td>
 											<?php if($isi['stok'] == '0'){?>
 												<button class="btn btn-danger"> Habis</button>
@@ -90,9 +90,12 @@
 												<?php echo $isi['stok'];?>
 											<?php }?>
 										</td>
+										<td>Rp.<?php echo number_format($isi['harga_beli']);?>,-</td>
+										<td>Rp.<?php echo number_format($isi['harga_jual']);?>,-</td>
 										<td> <?php echo $isi['satuan_barang'];?></td>
 										<td>
 											
+											<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
 											<?php if($isi['stok'] <=  '3'){?>
 												<form method="POST" action="fungsi/edit/edit.php?stok=edit">
 													<input type="text" name="restok" class="form-control">
@@ -103,15 +106,20 @@
 												</form>
 											<?php }else{?>
 											<a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-primary btn-xs">Details</button></a>
+											<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
 											<a href="index.php?page=barang/edit&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-warning btn-xs">Edit</button></a>
 											<a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>" onclick="javascript:return confirm('Hapus Data barang ?');"><button class="btn btn-danger btn-xs">Hapus</button></a>
+											<?php }?>
+											<?php }?>
+											<?php }else{?>
+												<a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-primary btn-xs">Details</button></a>
 											<?php }?>
 										</td>
 									</tr>
 								<?php 
 										$no++; 
-										$totalBeli += $isi['harga_beli']; 
-										$totalJual += $isi['harga_jual'];
+										$totalBeli += $isi['harga_beli'] * $isi['stok']; 
+										$totalJual += $isi['harga_jual'] * $isi['stok'];
 										$totalStok += $isi['stok'];
 									}
 								?>
@@ -119,9 +127,9 @@
 								<tfoot>
 									<tr>
 										<th colspan="5">Total </td>
+										<th><?php echo $totalStok;?></td>
 										<th>Rp.<?php echo number_format($totalBeli);?>,-</td>
 										<th>Rp.<?php echo number_format($totalJual);?>,-</td>
-										<th><?php echo $totalStok;?></td>
 										<th colspan="2" style="background:#ddd"></th>
 									</tr>
 								</tfoot>
@@ -131,6 +139,7 @@
 					<!-- end view barang -->
 					<!-- tambah barang MODALS-->
 						<!-- Modal -->
+						<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
 						<div id="myModal" class="modal fade" role="dialog">
 							<div class="modal-dialog">
 								<!-- Modal content-->
@@ -204,6 +213,7 @@
 								</form>
 							</div>
 						</div>
+						<?php }?>
 					</div>
               	</div>
           	</section>
