@@ -95,7 +95,7 @@
 										<td> <?php echo $isi['satuan_barang'];?></td>
 										<td>
 											
-											<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
+											
 											<?php if($isi['stok'] <=  '3'){?>
 												<form method="POST" action="fungsi/edit/edit.php?stok=edit">
 													<input type="text" name="restok" class="form-control">
@@ -106,15 +106,12 @@
 												</form>
 											<?php }else{?>
 											<a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-primary btn-xs">Details</button></a>
-											<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
+										
 											<a href="index.php?page=barang/edit&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-warning btn-xs">Edit</button></a>
 											<a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>" onclick="javascript:return confirm('Hapus Data barang ?');"><button class="btn btn-danger btn-xs">Hapus</button></a>
 											<?php }?>
-											<?php }?>
-											<?php }else{?>
-												<a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-primary btn-xs">Details</button></a>
-											<?php }?>
-										</td>
+											
+											
 									</tr>
 								<?php 
 										$no++; 
