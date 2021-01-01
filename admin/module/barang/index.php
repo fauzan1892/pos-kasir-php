@@ -139,7 +139,7 @@
 					<!-- end view barang -->
 					<!-- tambah barang MODALS-->
 						<!-- Modal -->
-						<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
+					
 						<div id="myModal" class="modal fade" role="dialog">
 							<div class="modal-dialog">
 								<!-- Modal content-->
@@ -213,7 +213,7 @@
 								</form>
 							</div>
 						</div>
-						<?php }?>
+						
 					</div>
               	</div>
           	</section>
