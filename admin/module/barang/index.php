@@ -44,12 +44,12 @@
 						?>
 
 						<!-- Trigger the modal with a button -->
-						<?php if(!empty($_SESSION['admin']['level'] == 1)){?>
+						
 						<button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal">
 							<i class="fa fa-plus"></i> Insert Data</button>
 						<div class="clearfix"></div>
 						<br/>
-						<?php }?>
+						
 						<!-- view barang -->	
 						<div class="modal-view">
 							<table class="table table-bordered table-striped" id="example1">
