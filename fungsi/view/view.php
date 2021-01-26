@@ -74,7 +74,7 @@
 			}
 
 			function barang_id(){
-				$sql = 'SELECT * FROM barang ORDER BY id_barang DESC';
+				$sql = 'SELECT * FROM barang ORDER BY id DESC';
 				$row = $this-> db -> prepare($sql);
 				$row -> execute();
 				$hasil = $row -> fetch();
@@ -86,14 +86,8 @@
 				}else if(strlen($tambah) == 2){
 					 $format = 'BR0'.$tambah.'';
 				}else{
-					
-					$sql1 = 'SELECT * FROM barang ORDER BY id DESC';
-					$row1 = $this->db->prepare($sql);
-					$row1 -> execute();
-					$hasil1 = $row1 -> fetch();
-					
-					$ex = $hasil1['id'];
-					$no = $ex + 1;
+					$ex = explode('BR',$hasil['id_barang']);
+					$no = (int) $ex[1] + 1;
 					$format = 'BR'.$no.'';
 				}
 				return $format;
