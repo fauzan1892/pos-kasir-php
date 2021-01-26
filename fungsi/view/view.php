@@ -86,8 +86,9 @@
 				}else if(strlen($tambah) == 2){
 					 $format = 'BR0'.$tambah.'';
 				}else{
-					$tmbh = $tambah +1;
-					$format = 'BR'.$tmbh.'';
+					$ex = explode('BR',$hasil['id_barang']);
+					$no = $ex[1] + 1;
+					$format = 'BR'.$no.'';
 				}
 				return $format;
 			}
