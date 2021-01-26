@@ -46,7 +46,7 @@
 			function barang(){
 				$sql = "select barang.*, kategori.id_kategori, kategori.nama_kategori
 						from barang inner join kategori on barang.id_kategori = kategori.id_kategori 
-						ORDER BY id_barang DESC";
+						ORDER BY id DESC";
 				$row = $this-> db -> prepare($sql);
 				$row -> execute();
 				$hasil = $row -> fetchAll();
@@ -86,8 +86,14 @@
 				}else if(strlen($tambah) == 2){
 					 $format = 'BR0'.$tambah.'';
 				}else{
-					$ex = explode('BR',$hasil['id_barang']);
-					$no = $ex[1] + 1;
+					
+					$sql1 = 'SELECT * FROM barang ORDER BY id DESC';
+					$row1 = $this->db->prepare($sql);
+					$row1 -> execute();
+					$hasil1 = $row1 -> fetch();
+					
+					$ex = $hasil1['id'];
+					$no = $ex + 1;
 					$format = 'BR'.$no.'';
 				}
 				return $format;
