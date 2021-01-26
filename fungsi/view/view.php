@@ -86,7 +86,8 @@
 				}else if(strlen($tambah) == 2){
 					 $format = 'BR0'.$tambah.'';
 				}else{
-					 $format = 'BR'.$tambah.'';
+					$tmbh = $tambah +1;
+					$format = 'BR'.$tmbh.'';
 				}
 				return $format;
 			}
