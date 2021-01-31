@@ -28,16 +28,17 @@
 						<?php }?>
 						
 						<?php 
-							$sql1=" select * from barang where stok <= 3";
-							$row1 = $config -> prepare($sql1);
-							$row1 -> execute();
-							$r = $row1 -> fetchAll();
-							foreach($r as $q) {
+							$sql=" select * from barang where stok <= 3";
+							$row = $config -> prepare($sql);
+							$row -> execute();
+							$r = $row -> rowCount();
+							if($r > 0){
 						?>	
 						<?php
 								echo "
 								<div class='alert alert-warning'>
-									<span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $q['nama_barang']."</a>  / <span style='color:red'> ID ". $q['id_barang']."</span> yang tersisa sudah kurang dari 3 . silahkan pesan lagi !!
+									<span class='glyphicon glyphicon-info-sign'></span> Ada <span style='color:red'>$r</span> barang yang Stok tersisa sudah kurang dari 3 items. silahkan pesan lagi !!
+									<span class='pull-right'><a href='index.php?page=barang&stok=yes'>Cek Barang <i class='fa fa-angle-double-right'></i></a></span>
 								</div>
 								";	
 							}
@@ -47,6 +48,12 @@
 						
 						<button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal">
 							<i class="fa fa-plus"></i> Insert Data</button>
+						<a href="index.php?page=barang&stok=yes" style="margin-right :0.5pc;" 
+							class="btn btn-warning btn-md pull-right">
+							<i class="fa fa-list"></i> Sortir Stok Kurang</a>
+						<a href="index.php?page=barang" style="margin-right :0.5pc;" 
+							class="btn btn-success btn-md pull-right">
+							<i class="fa fa-refresh"></i> Refresh Data</a>
 						<div class="clearfix"></div>
 						<br/>
 						
@@ -73,7 +80,13 @@
 									$totalBeli = 0;
 									$totalJual = 0;
 									$totalStok = 0;
-									$hasil = $lihat -> barang();
+									if($_GET['stok'] == 'yes')
+									{
+										$hasil = $lihat -> barang_stok();
+
+									}else{
+										$hasil = $lihat -> barang();
+									}
 									$no=1;
 									foreach($hasil as $isi) {
 								?>
@@ -94,15 +107,16 @@
 										<td>Rp.<?php echo number_format($isi['harga_jual']);?>,-</td>
 										<td> <?php echo $isi['satuan_barang'];?></td>
 										<td>
-											
-											
 											<?php if($isi['stok'] <=  '3'){?>
 												<form method="POST" action="fungsi/edit/edit.php?stok=edit">
 													<input type="text" name="restok" class="form-control">
 													<input type="hidden" name="id" value="<?php echo $isi['id_barang'];?>" class="form-control">
-													<button class="btn btn-primary">
+													<button class="btn btn-primary btn-sm">
 														Restok
 													</button>
+													<a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>" 
+														onclick="javascript:return confirm('Hapus Data barang ?');">
+														<button class="btn btn-danger btn-sm">Hapus</button></a>
 												</form>
 											<?php }else{?>
 											<a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button class="btn btn-primary btn-xs">Details</button></a>

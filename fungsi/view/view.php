@@ -52,6 +52,17 @@
 				$hasil = $row -> fetchAll();
 				return $hasil;
 			}
+			
+			function barang_stok(){
+				$sql = "select barang.*, kategori.id_kategori, kategori.nama_kategori
+						from barang inner join kategori on barang.id_kategori = kategori.id_kategori 
+						where stok <= 3 
+						ORDER BY id DESC";
+				$row = $this-> db -> prepare($sql);
+				$row -> execute();
+				$hasil = $row -> fetchAll();
+				return $hasil;
+			}
 
 			function barang_edit($id){
 				$sql = "select barang.*, kategori.id_kategori, kategori.nama_kategori
@@ -140,31 +151,49 @@
 				$hasil = $row -> fetch();
 				return $hasil;
 			}
-
+			
 			function jual(){
-				$sql ="SELECT nota.* , barang.id_barang, barang.nama_barang, member.id_member,
+				$sql ="SELECT nota.* , barang.id_barang, barang.nama_barang, barang.harga_beli, member.id_member,
 						member.nm_member from nota 
 					   left join barang on barang.id_barang=nota.id_barang 
 					   left join member on member.id_member=nota.id_member 
+					   where nota.periode = ?
 					   ORDER BY id_nota DESC";
 				$row = $this-> db -> prepare($sql);
-				$row -> execute();
+				$row -> execute(array(date('m-Y')));
 				$hasil = $row -> fetchAll();
 				return $hasil;
 			}
 
-			
 			function periode_jual($periode){
-				$sql ="SELECT nota.* , barang.id_barang, barang.nama_barang, member.id_member,
+				$sql ="SELECT nota.* , barang.id_barang, barang.nama_barang, barang.harga_beli, member.id_member,
 						member.nm_member from nota 
 					   left join barang on barang.id_barang=nota.id_barang 
-					   left join member on member.id_member=nota.id_member WHERE nota.periode = ?";
+					   left join member on member.id_member=nota.id_member WHERE nota.periode = ? 
+					   ORDER BY id_nota ASC";
 				$row = $this-> db -> prepare($sql);
 				$row -> execute(array($periode));
 				$hasil = $row -> fetchAll();
 				return $hasil;
 			}
 
+			function hari_jual($hari){
+				$ex = explode('-', $hari);
+				$monthNum  = $ex[1];
+				$monthName = date('F', mktime(0, 0, 0, $monthNum, 10));
+				$cek = $ex[2].' '.$monthName.' '.$ex[0];
+
+				$param = "%{$cek}%";
+				$sql ="SELECT nota.* , barang.id_barang, barang.nama_barang,  barang.harga_beli, member.id_member,
+						member.nm_member from nota 
+					   left join barang on barang.id_barang=nota.id_barang 
+					   left join member on member.id_member=nota.id_member WHERE nota.tanggal_input LIKE ? 
+					   ORDER BY id_nota ASC";
+				$row = $this-> db -> prepare($sql);
+				$row -> execute(array($param));
+				$hasil = $row -> fetchAll();
+				return $hasil;
+			}
 
 			function penjualan(){
 				$sql ="SELECT penjualan.* , barang.id_barang, barang.nama_barang, member.id_member,

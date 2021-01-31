@@ -10,6 +10,8 @@ setting koneksi di config.php dan ganti username, password dan dbname nya
 User : admin
 <br/>
 Pass : 123
+<br>
+<span style="color:red">* Penggunaan Login untuk <b>single User</b> </span>
 
 ## Contoh Program 
 - Login
@@ -27,7 +29,18 @@ Pass : 123
 - Laporan 
 <img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/5.png">
 
+- Nama Toko 
+<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/6.png">
+
+- Atur User 
+<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/7.png">
+
 ## Changelog
+31 Januari 2021<br>
+- Tambah Sortir khusus stok kurang dari >= 3
+- Cari Per Tanggal Laporan 
+- Cari Per bulan Laporan
+- Fix Perhitungan Laporan
 
 06 Oktober 2020<br>
 - revisi session error pada hosting dengan error : 
