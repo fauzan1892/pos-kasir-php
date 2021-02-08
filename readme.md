@@ -1,5 +1,4 @@
 ## Deskripsi Aplikasi 
-[![Github All Releases](https://img.shields.io/github/downloads/fauzan1892/pos-kasir-php/total.svg)]()
 Source Code Aplikasi Penjualan Barang sederhana berbasis Website dengan PHP & MYSQL.
 <br>
 Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html" target="_blank">DISINI</a>
