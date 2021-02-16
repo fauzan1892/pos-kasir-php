@@ -82,16 +82,18 @@
 													<td><?php echo $no;?></td>
 													<td><?php echo $isi['nama_barang'];?></td>
 													<td>
-														<form method="POST" action="fungsi/edit/edit.php?jual=jual">
-															<input type="number" name="jumlah" value="<?php echo $isi['jumlah'];?>" class="form-control">
-															<input type="hidden" name="id" value="<?php echo $isi['id_penjualan'];?>" class="form-control">
-															<input type="hidden" name="id_barang" value="<?php echo $isi['id_barang'];?>" class="form-control">
+												<!-- aksi ke table penjualan -->
+												<form method="POST" action="fungsi/edit/edit.php?jual=jual">
+														<input type="number" name="jumlah" value="<?php echo $isi['jumlah'];?>" class="form-control">
+														<input type="hidden" name="id" value="<?php echo $isi['id_penjualan'];?>" class="form-control">
+														<input type="hidden" name="id_barang" value="<?php echo $isi['id_barang'];?>" class="form-control">
 													</td>
 													<td>Rp.<?php echo number_format($isi['total']);?>,-</td>
 													<td><?php echo $isi['nm_member'];?></td>
 													<td>
-															<button type="submit" class="btn btn-warning">Update</button>
-														</form>
+														<button type="submit" class="btn btn-warning">Update</button>
+												</form>
+												<!-- aksi ke table penjualan -->
 														<a href="fungsi/hapus/hapus.php?jual=jual&id=<?php echo $isi['id_penjualan'];?>&brg=<?php echo $isi['id_barang'];?>
 														&jml=<?php echo $isi['jumlah']; ?>"  class="btn btn-danger"><i class="fa fa-times"></i>
 														</a>
@@ -139,7 +141,7 @@
 															$idb  = $hsl['id_barang'];
 
 															$total_stok = $stok - $jumlah[$x];
-															echo $total_stok;
+															// echo $total_stok;
 															$sql_stok = "UPDATE barang SET stok = ? WHERE id_barang = ?";
 															$row_stok = $config->prepare($sql_stok);
 															$row_stok->execute(array($total_stok, $idb));
@@ -152,8 +154,8 @@
 												}
 											}
 											?>
+											<!-- aksi ke table nota -->
 											<form method="POST" action="index.php?page=jual&nota=yes#kasirnya">
-											
 												<?php foreach($hasil_penjualan as $isi){;?>
 													<input type="hidden" name="id_barang[]" value="<?php echo $isi['id_barang'];?>">
 													<input type="hidden" name="id_member[]" value="<?php echo $isi['id_member'];?>">
@@ -174,6 +176,7 @@
 														<b>RESET</b></a></td><?php }?></td>
 												</tr>
 											</form>
+											<!-- aksi ke table nota -->
 											<tr>
 												<td>Kembali</td>
 												<td><input type="text" class="form-control" value="<?php echo $hitung;?>"></td>
