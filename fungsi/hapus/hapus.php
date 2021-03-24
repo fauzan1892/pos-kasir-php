@@ -26,13 +26,13 @@ if(!empty($_SESSION['admin'])){
 		$rowI -> execute($dataI);
 		$hasil = $rowI -> fetch();
 		
-		$jml = $_GET['jml'] + $hasil['stok'];
+		/*$jml = $_GET['jml'] + $hasil['stok'];
 		
 		$dataU[] = $jml;
 		$dataU[] = $_GET['brg'];
 		$sqlU = 'UPDATE barang SET stok =? where id_barang=?';
 		$rowU = $config -> prepare($sqlU);
-		$rowU -> execute($dataU);
+		$rowU -> execute($dataU);*/
 		
 		$id = $_GET['id'];
 		$data[] = $id;
