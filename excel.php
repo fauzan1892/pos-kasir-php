@@ -1,9 +1,10 @@
 <?php 
-    // fungsi header dengan mengirimkan raw data excel
-    header("Content-type: application/vnd-ms-excel");
-    // membuat nama file ekspor "export-to-excel.xls"
-    header("Content-Disposition: attachment; filename=data-laporan-".date('Y-m-d').".xlsx");
-  
+   
+    header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+    header("Content-Disposition: attachment; filename=data-laporan-".date('Y-m-d').".xls");  //File name extension was wrong
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Cache-Control: private",false); 
 
     require 'config.php';
     include $view;
@@ -53,7 +54,6 @@
                     <th style="width:10%;"> Jumlah</th>
                     <th style="width:10%;"> Modal</th>
                     <th style="width:10%;"> Total</th>
-                    <th style="width:20%;"> Total</th>
                     <th> Kasir</th>
                     <th> Tanggal Input</th>
                 </tr>
@@ -97,20 +97,18 @@
                     <td><?php echo $isi['tanggal_input'];?></td>
                 </tr>
                 <?php $no++; }?>
-            </tbody>
-            <tfoot>
                 <tr>
-                    <tr>
-                        <th colspan="3">Total Terjual</td>
-                        <th><?php echo $jumlah;?></td>
-                        <th>Rp.<?php echo number_format($modal);?>,-</th>
-                        <th>Rp.<?php echo number_format($bayar);?>,-</th>
-                        <th style="background:#0bb365;color:#fff;">Keuntungan</th>
-                        <th style="background:#0bb365;color:#fff;">
-                            Rp.<?php echo number_format($bayar-$modal);?>,-</th>
-                    </tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><b>Total Terjual</b></td>
+                    <td><b><?php echo $jumlah;?></b></td>
+                    <td><b>Rp.<?php echo number_format($modal);?>,-</b></td>
+                    <td><b>Rp.<?php echo number_format($bayar);?>,-</b></td>
+                    <td><b>Keuntungan</b></td>
+                    <td><b>
+                        Rp.<?php echo number_format($bayar-$modal);?>,-</b></td>
                 </tr>
-            </tfoot>
+            </tbody>
         </table>
     </div>
 </body>
