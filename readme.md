@@ -6,7 +6,7 @@ Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjual
 https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html</a>
 <br>
 <br>
-Beli Versi Terbaru nya <a href="https://codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html">https://codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html</a>
+Beli Versi Terbaru nya disini : <a href="https://codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html">https://codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html</a>
 <br>
 <br>
 <span style="color:red"><b> * Untuk Reuploader Source Code tolong cantumin sumber juga ya, terima kasih :)</b></span>
