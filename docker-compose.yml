@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    image: novend10/pos-kasir-php
+    container_name: php-apache
+    depends_on:
+      -db
+    volumes:
+      -./php/src:/var/www/html/
+    ports:
+      - 8000:80
+    networks:
+      - backend
+  
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: db_toko
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+      - ./db_toko.sql:/docker-entrypoint-initdb.d/db_toko.sql
+    networks:
+      - backend
+  
+  volumes:
+    db:
+
+  networks:
+    backend:
+      name: backend-network
+      ipam:
+        driver: default
+        config:
+          - subnet: 172.20.0.0/24
