@@ -85,38 +85,34 @@ if(!empty($_SESSION['admin'])){
 		if ($_FILES['foto']["error"] > 0) {
 			$output['error']= "Error in File";
 		} elseif (!in_array($_FILES['foto']["type"], $allowedImageType)) {
-			echo "You can only upload JPG, PNG and GIF file";
-			echo "<font face='Verdana' size='2' ><BR><BR><BR>
-					<a href='../../index.php?page=user'>Back to upform</a><BR>";
-
+			// echo "You can only upload JPG, PNG and GIF file";
+			// echo "<font face='Verdana' size='2' ><BR><BR><BR>
+			// 		<a href='../../index.php?page=user'>Back to upform</a><BR>";
+			echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
 		}elseif (round($_FILES['foto']["size"] / 1024) > 4096) {
-			echo "WARNING !!! Besar Gambar Tidak Boleh Lebih Dari 4 MB";
-			echo "<font face='Verdana' size='2' ><BR><BR><BR>
-					<a href='../../index.php?page=user'>Back to upform</a><BR>";
-
+			// echo "WARNING !!! Besar Gambar Tidak Boleh Lebih Dari 4 MB";
+			// echo "<font face='Verdana' size='2' ><BR><BR><BR>
+			// 		<a href='../../index.php?page=user'>Back to upform</a><BR>";
+			echo '<script>alert("WARNING !!! Besar Gambar Tidak Boleh Lebih Dari 4 MB");window.location="../../index.php?page=user"</script>';
 		}else{
-			$target_path = '../../assets/img/user/';
-			$target_path = $target_path . basename( $_FILES['foto']['name']); 
-			if (file_exists("$target_path")){ 
-				echo "<font face='Verdana' size='2' >Ini Terjadi Karena Telah Masuk Nama File Yang Sama,
-				<br> Silahkan Rename File terlebih dahulu<br>";
-
-			echo "<font face='Verdana' size='2' ><BR><BR><BR>
-					<a href='../../index.php?page=user'>Back to upform</a><BR>";
-
-				}elseif(move_uploaded_file($_FILES['foto']['tmp_name'], $target_path)){
+			$dir = '../../assets/img/user/';
+			$tmp_name = $_FILES['foto']['tmp_name'];
+			$name = time().basename($_FILES['foto']['name']);
+            if(move_uploaded_file($tmp_name, $dir.$name)){
 					//post foto lama
 				$foto2 = $_POST['foto2'];
 				//remove foto di direktori
 				unlink('../../assets/img/user/'.$foto2.'');
 				//input foto
 				$id = $_POST['id'];
-				$data[] = $_FILES['foto']['name'];
+				$data[] = $name;
 				$data[] = $id;
 				$sql = 'UPDATE member SET gambar=?  WHERE member.id_member=?';
 				$row = $config -> prepare($sql);
 				$row -> execute($data);
 				echo '<script>window.location="../../index.php?page=user&success=edit-data"</script>';
+			}else{
+				echo '<script>alert("Masukan Gambar !");window.location="../../index.php?page=user"</script>';
 			}
 		}
 	}

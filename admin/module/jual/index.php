@@ -52,7 +52,9 @@
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<h4><i class="fa fa-shopping-cart"></i> KASIR
-									<a class="btn btn-danger pull-right" style="margin-top:-0.5pc;" href="fungsi/hapus/hapus.php?penjualan=jual">
+									<a class="btn btn-danger pull-right" 
+										onclick="javascript:return confirm('Apakah anda ingin reset keranjang ?');" 
+										style="margin-top:-0.5pc;" href="fungsi/hapus/hapus.php?penjualan=jual">
 										<b>RESET KERANJANG</b></a>
 									</h4>
 								</div>
@@ -145,7 +147,6 @@
 															$sql_stok = "UPDATE barang SET stok = ? WHERE id_barang = ?";
 															$row_stok = $config->prepare($sql_stok);
 															$row_stok->execute(array($total_stok, $idb));
-															
 														}
 														echo '<script>alert("Belanjaan Berhasil Di Bayar !");</script>';
 													}else{
