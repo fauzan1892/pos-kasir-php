@@ -3,8 +3,7 @@ Source Code Aplikasi Penjualan Barang sederhana berbasis Website dengan PHP & MY
 
 ## DONASI : <a href="https://saweria.co/fauzan1892">https://saweria.co/fauzan1892</a>
 
-### Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html" target="_blank">
-https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html</a>
+### Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html">https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html</a>
 
 ### Beli Versi Terbaru nya disini : <a href="https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html">https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html</a>
 ### * Untuk Reuploader Source Code tolong cantumin sumber juga ya, terima kasih :)
