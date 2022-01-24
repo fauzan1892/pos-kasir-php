@@ -1,15 +1,12 @@
 ## Deskripsi Aplikasi 
 Source Code Aplikasi Penjualan Barang sederhana berbasis Website dengan PHP & MYSQL.
-<br>
-<br>
-Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html" target="_blank">
+
+## DONASI : <a href="https://saweria.co/fauzan1892">https://saweria.co/fauzan1892</a>
+### Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html" target="_blank">
 https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html</a>
-<br>
-<br>
-Beli Versi Terbaru nya disini : <a href="https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html">https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html</a>
-<br>
-<br>
-<span style="color:red"><b> * Untuk Reuploader Source Code tolong cantumin sumber juga ya, terima kasih :)</b></span>
+
+### Beli Versi Terbaru nya disini : <a href="https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html">https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html</a>
+### * Untuk Reuploader Source Code tolong cantumin sumber juga ya, terima kasih :)
 
 ## Setting Koneksi PHP
 setting koneksi di config.php dan ganti username, password dan dbname nya
