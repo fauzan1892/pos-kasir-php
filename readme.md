@@ -2,6 +2,7 @@
 Source Code Aplikasi Penjualan Barang sederhana berbasis Website dengan PHP & MYSQL.
 
 ## DONASI : <a href="https://saweria.co/fauzan1892">https://saweria.co/fauzan1892</a>
+
 ### Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html" target="_blank">
 https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html</a>
 
