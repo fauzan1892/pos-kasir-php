@@ -113,7 +113,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id_member`, `nm_member`, `alamat_member`, `telepon`, `email`, `gambar`, `NIK`) VALUES
-(1, 'Fauzan Falah', 'uj harapan', '089618173609', 'fauzanfalah21@gmail.com', 'unnamed.jpg', '12314121');
+(1, 'Fauzan Falah', 'uj harapan', '081234567890', 'example@gmail.com', 'unnamed.jpg', '12314121');
 
 -- --------------------------------------------------------
 
@@ -187,7 +187,7 @@ CREATE TABLE `toko` (
 --
 
 INSERT INTO `toko` (`id_toko`, `nama_toko`, `alamat_toko`, `tlp`, `nama_pemilik`) VALUES
-(1, 'CV Daruttaqwa', 'Jl. Ujung Harapan Kav. Daruttaqwa RT 005/014 No.47, Kab. Bekasi ', '089618173609', 'Fauzan Falah');
+(1, 'CV Daruttaqwa', 'Ujung Harapan', '081234567890', 'Fauzan Falah');
 
 --
 -- Indexes for dumped tables
