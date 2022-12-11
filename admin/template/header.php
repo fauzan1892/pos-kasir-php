@@ -21,7 +21,11 @@
     <link href="sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- DATATABLES BS 4-->
     <link rel="stylesheet" href="sb-admin/vendor/datatables/dataTables.bootstrap4.css" />
-
+    <!-- Bootstrap core JavaScript-->
+    <script src="sb-admin/vendor/jquery/jquery.min.js"></script>
+    <script src="sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 </head>
 
 <body id="page-top">
