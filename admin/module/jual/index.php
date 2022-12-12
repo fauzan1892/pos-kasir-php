@@ -76,25 +76,25 @@
 							</thead>
 							<tbody>
 								<?php $total_bayar=0; $no=1; $hasil_penjualan = $lihat -> penjualan();?>
-								<?php foreach($hasil_penjualan  as $isi){;?>
+								<?php foreach($hasil_penjualan  as $isi){?>
 								<tr>
 									<td><?php echo $no;?></td>
 									<td><?php echo $isi['nama_barang'];?></td>
 									<td>
-								<!-- aksi ke table penjualan -->
-								<form method="POST" action="fungsi/edit/edit.php?jual=jual">
-										<input type="number" name="jumlah" value="<?php echo $isi['jumlah'];?>" class="form-control">
-										<input type="hidden" name="id" value="<?php echo $isi['id_penjualan'];?>" class="form-control">
-										<input type="hidden" name="id_barang" value="<?php echo $isi['id_barang'];?>" class="form-control">
-									</td>
-									<td>Rp.<?php echo number_format($isi['total']);?>,-</td>
-									<td><?php echo $isi['nm_member'];?></td>
-									<td>
-										<button type="submit" class="btn btn-warning">Update</button>
-								</form>
-								<!-- aksi ke table penjualan -->
+										<!-- aksi ke table penjualan -->
+										<form method="POST" action="fungsi/edit/edit.php?jual=jual">
+												<input type="number" name="jumlah" value="<?php echo $isi['jumlah'];?>" class="form-control">
+												<input type="hidden" name="id" value="<?php echo $isi['id_penjualan'];?>" class="form-control">
+												<input type="hidden" name="id_barang" value="<?php echo $isi['id_barang'];?>" class="form-control">
+											</td>
+											<td>Rp.<?php echo number_format($isi['total']);?>,-</td>
+											<td><?php echo $isi['nm_member'];?></td>
+											<td>
+												<button type="submit" class="btn btn-warning">Update</button>
+										</form>
+										<!-- aksi ke table penjualan -->
 										<a href="fungsi/hapus/hapus.php?jual=jual&id=<?php echo $isi['id_penjualan'];?>&brg=<?php echo $isi['id_barang'];?>
-										&jml=<?php echo $isi['jumlah']; ?>"  class="btn btn-danger"><i class="fa fa-times"></i>
+											&jml=<?php echo $isi['jumlah']; ?>"  class="btn btn-danger"><i class="fa fa-times"></i>
 										</a>
 									</td>
 								</tr>
@@ -186,7 +186,6 @@
 										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
 									</button></a>
 								</td>
-
 							</tr>
 						</table>
 						<br/>
@@ -203,19 +202,19 @@
 $(document).ready(function(){
 	$("#cari").change(function(){
 		$.ajax({
-		type: "POST",
-		url: "fungsi/edit/edit.php?cari_barang=yes",
-		data:'keyword='+$(this).val(),
-		beforeSend: function(){
-            $("#hasil_cari").hide();
-			$("#tunggu").html('<p style="color:green"><blink>tunggu sebentar</blink></p>');
-		},
-          success: function(html){
-			$("#tunggu").html('');
-            $("#hasil_cari").show();
-            $("#hasil_cari").html(html);
-		}
-	});
+			type: "POST",
+			url: "fungsi/edit/edit.php?cari_barang=yes",
+			data:'keyword='+$(this).val(),
+			beforeSend: function(){
+				$("#hasil_cari").hide();
+				$("#tunggu").html('<p style="color:green"><blink>tunggu sebentar</blink></p>');
+			},
+			success: function(html){
+				$("#tunggu").html('');
+				$("#hasil_cari").show();
+				$("#hasil_cari").html(html);
+			}
+		});
 	});
 });
 //To select country name

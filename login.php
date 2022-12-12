@@ -24,55 +24,68 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Dashboard">
-    <meta name="keyword">
+    <meta name="author" content="">
+    <title>Login - POS Codekop</title>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
 
-    <title>Login To Admin</title>
+<body class="bg-gradient-primary">
+    <div class="container">
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body style="background:#004643;color:#fff;">
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-
-	  <div id="login-page" style="padding-top:3pc;">
-	  	<div class="container">
-		      <form class="form-login" method="POST">
-		        <h2 class="form-login-heading">Aplikasi POS</h2>
-		        <div class="login-wrap">
-		            <input type="text" class="form-control" name="user" placeholder="User ID" autofocus>
-		            <br>
-		            <input type="password" class="form-control" name="pass" placeholder="Password">
-		            <br>
-		            <button class="btn btn-primary btn-block" name="proses" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
-		        </div>
-		      </form>	  	
-	  	
-	  	</div>
-	  </div>
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-  </body>
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-md-5 mt-5">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+						<div class="p-5">
+							<div class="text-center">
+								<h4 class="h4 text-gray-900 mb-4"><b>Login POS Codekop</b></h4>
+							</div>
+							<form class="form-login" method="POST">
+								<div class="form-group">
+									<input type="text" class="form-control form-control-user" name="user"
+										placeholder="User ID" autofocus>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control form-control-user" name="pass"
+										placeholder="Password">
+								</div>
+								<button class="btn btn-primary btn-block" name="proses" type="submit"><i
+										class="fa fa-lock"></i>
+									SIGN IN</button>
+							</form>
+							<!-- <hr>
+							<div class="text-center">
+								<a class="small" href="forgot-password.html">Forgot Password?</a>
+							</div>
+							<div class="text-center">
+								<a class="small" href="register.html">Create an Account!</a>
+							</div> -->
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="sb-admin/vendor/jquery/jquery.min.js"></script>
+    <script src="sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="sb-admin/js/sb-admin-2.min.js"></script>
+</body>
 </html>
-

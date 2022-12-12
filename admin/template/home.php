@@ -22,7 +22,7 @@
 <?php $jual = $lihat -> jual_row();?>
 <div class="row">
     <!--STATUS cardS -->
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h6 class="pt-2"><i class="fas fa-cubes"></i> Nama Barang</h6>
@@ -40,7 +40,7 @@
         <!--/grey-card -->
     </div><!-- /col-md-3-->
     <!-- STATUS cardS -->
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h6 class="pt-2"><i class="fas fa-chart-bar"></i> Stok Barang</h6>
@@ -58,7 +58,7 @@
         <!--/grey-card -->
     </div><!-- /col-md-3-->
     <!-- STATUS cardS -->
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h6 class="pt-2"><i class="fas fa-upload"></i> Telah Terjual</h6>
@@ -75,7 +75,7 @@
         </div>
         <!--/grey-card -->
     </div><!-- /col-md-3-->
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h6 class="pt-2"><i class="fa fa-bookmark"></i> Kategori Barang</h6>

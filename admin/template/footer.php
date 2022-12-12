@@ -7,8 +7,10 @@
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span><?php echo date('Y');?> - Sistem Penjualan Barang Berbasis Web |
-                    BY <b><a href="https://codekop.com" target="_blank">CODEKOP.COM</a></b></span>
+                <span>
+                    <?php echo date('Y');?> - Sistem Penjualan Barang Berbasis Web |
+                    BY <b><a href="https://codekop.com" target="_blank">CODEKOP.COM</a></b>
+                </span>
             </div>
         </div>
     </footer>
