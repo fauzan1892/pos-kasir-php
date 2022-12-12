@@ -1,4 +1,4 @@
-        <h3>Data Barang</h3>
+        <h4>Data Barang</h4>
         <br />
         <?php if(isset($_GET['success-stok'])){?>
         <div class="alert alert-success">

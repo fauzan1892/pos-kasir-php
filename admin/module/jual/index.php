@@ -8,7 +8,7 @@
 	$id = $_SESSION['admin']['id_member'];
 	$hasil = $lihat -> member_edit($id);
 ?>
-	<h5>Keranjang Penjualan</h5>
+	<h4>Keranjang Penjualan</h4>
 	<br>
 	<?php if(isset($_GET['success'])){?>
 	<div class="alert alert-success">

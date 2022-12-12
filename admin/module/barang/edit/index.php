@@ -9,7 +9,7 @@
 	$hasil = $lihat -> barang_edit($id);
 ?>
  <a href="index.php?page=barang" class="btn btn-primary mb-3"><i class="fa fa-angle-left"></i> Balik </a>
- <h3>Edit Barang</h3>
+ <h4>Edit Barang</h4>
  <?php if(isset($_GET['success'])){?>
  <div class="alert alert-success">
      <p>Edit Data Berhasil !</p>
