@@ -19,9 +19,9 @@ date_default_timezone_set("Asia/Jakarta");
 error_reporting(0);
 
 	// sesuaikan dengan server anda
-	$host 	= 'localhost'; // host server
-	$user 	= 'root';  // username server
-	$pass 	= ''; // password server, kalau pakai xampp kosongin saja
+	$host 	= 'testjag.mysql.database.azure.com'; // host server
+	$user 	= 'jagruti';  // username server
+	$pass 	= 'Neosoft123'; // password server, kalau pakai xampp kosongin saja
 	$dbname = 'db_toko'; // nama database anda
 	
 	try{
