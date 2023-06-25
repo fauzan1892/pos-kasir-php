@@ -80,20 +80,36 @@ if (!empty($_SESSION['admin'])) {
     if (!empty($_GET['gambar'])) {
         $id = htmlentities($_POST['id']);
         set_time_limit(0);
-        $allowedImageType = array("image/gif",   "image/JPG",   "image/jpeg",   "image/pjpeg",   "image/png",   "image/x-png"  );
-
-        if ($_FILES['foto']["error"] > 0) {
-            $output['error']= "Error in File";
+        $allowedImageType = array("image/gif", "image/JPG", "image/jpeg", "image/pjpeg", "image/png", "image/x-png", 'image/webp');
+        $filepath = $_FILES['foto']['tmp_name'];
+        $fileSize = filesize($filepath);
+        $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+        $filetype = finfo_file($fileinfo, $filepath);
+        $allowedTypes = [
+            'image/png'   => 'png',
+            'image/jpeg'  => 'jpg',
+            'image/gif'   => 'gif',
+            'image/jpg'   => 'jpeg',
+            'image/webp'  => 'webp'
+        ];
+        if(!in_array($filetype, array_keys($allowedTypes))) {
+            echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
+            exit;
+        }else if ($_FILES['foto']["error"] > 0) {
+            echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
+            exit;
         } elseif (!in_array($_FILES['foto']["type"], $allowedImageType)) {
             // echo "You can only upload JPG, PNG and GIF file";
             // echo "<font face='Verdana' size='2' ><BR><BR><BR>
             // 		<a href='../../index.php?page=user'>Back to upform</a><BR>";
             echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
+            exit;
         } elseif (round($_FILES['foto']["size"] / 1024) > 4096) {
             // echo "WARNING !!! Besar Gambar Tidak Boleh Lebih Dari 4 MB";
             // echo "<font face='Verdana' size='2' ><BR><BR><BR>
             // 		<a href='../../index.php?page=user'>Back to upform</a><BR>";
             echo '<script>alert("WARNING !!! Besar Gambar Tidak Boleh Lebih Dari 4 MB");window.location="../../index.php?page=user"</script>';
+            exit;
         } else {
             $dir = '../../assets/img/user/';
             $tmp_name = $_FILES['foto']['tmp_name'];
@@ -113,6 +129,7 @@ if (!empty($_SESSION['admin'])) {
                 echo '<script>window.location="../../index.php?page=user&success=edit-data"</script>';
             } else {
                 echo '<script>alert("Masukan Gambar !");window.location="../../index.php?page=user"</script>';
+                exit;
             }
         }
     }
