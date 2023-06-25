@@ -1,5 +1,11 @@
 <?php 
-   
+   @ob_start();
+   session_start();
+   if(!empty($_SESSION['admin'])){
+		
+   }else{
+      echo '<script>window.location="login.php";</script>';
+   }
     header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
     header("Content-Disposition: attachment; filename=data-laporan-".date('Y-m-d').".xls");  //File name extension was wrong
     header("Expires: 0");
