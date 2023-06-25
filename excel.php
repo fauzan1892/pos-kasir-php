@@ -1,11 +1,10 @@
 <?php 
-   @ob_start();
-   session_start();
-   if(!empty($_SESSION['admin'])){
-		
-   }else{
-      echo '<script>window.location="login.php";</script>';
-   }
+	@ob_start();
+	session_start();
+	if(!empty($_SESSION['admin'])){ }else{
+		echo '<script>window.location="login.php";</script>';
+        exit;
+	}
     header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
     header("Content-Disposition: attachment; filename=data-laporan-".date('Y-m-d').".xls");  //File name extension was wrong
     header("Expires: 0");
@@ -43,10 +42,10 @@
     <!-- view barang -->	
     <div class="modal-view">
         <h3 style="text-align:center;"> 
-                <?php if(!empty($_GET['cari'])){ ?>
-                    Data Laporan Penjualan <?= $bulan_tes[$_GET['bln']];?> <?= $_GET['thn'];?>
-                <?php }elseif(!empty($_GET['hari'])){?>
-                    Data Laporan Penjualan <?= $_GET['tgl'];?>
+                <?php if(!empty(htmlentities($_GET['cari']))){ ?>
+                    Data Laporan Penjualan <?= $bulan_tes[htmlentities($_GET['bln'])];?> <?= htmlentities($_GET['thn']);?>
+                <?php }elseif(!empty(htmlentities($_GET['hari']))){?>
+                    Data Laporan Penjualan <?= htmlentities($_GET['tgl']);?>
                 <?php }else{?>
                     Data Laporan Penjualan <?= $bulan_tes[date('m')];?> <?= date('Y');?>
                 <?php }?>
@@ -67,14 +66,14 @@
             <tbody>
                 <?php 
                     $no=1; 
-                    if(!empty($_GET['cari'])){
-                        $periode = $_GET['bln'].'-'.$_GET['thn'];
+                    if(!empty(htmlentities($_GET['cari']))){
+                        $periode = htmlentities($_GET['bln']).'-'.htmlentities($_GET['thn']);
                         $no=1; 
                         $jumlah = 0;
                         $bayar = 0;
                         $hasil = $lihat -> periode_jual($periode);
-                    }elseif(!empty($_GET['hari'])){
-                        $hari = $_GET['tgl'];
+                    }elseif(!empty(htmlentities($_GET['hari']))){
+                        $hari = htmlentities($_GET['tgl']);
                         $no=1; 
                         $jumlah = 0;
                         $bayar = 0;

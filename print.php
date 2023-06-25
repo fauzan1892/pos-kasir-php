@@ -1,11 +1,10 @@
 <?php 
-        @ob_start();
-        session_start();
-        if(!empty($_SESSION['admin'])){
-		
-        }else{
-            echo '<script>window.location="login.php";</script>';
-        }
+	@ob_start();
+	session_start();
+	if(!empty($_SESSION['admin'])){ }else{
+		echo '<script>window.location="login.php";</script>';
+        exit;
+	}
 	require 'config.php';
 	include $view;
 	$lihat = new view($config);
@@ -27,7 +26,7 @@
 						<p><?php echo $toko['nama_toko'];?></p>
 						<p><?php echo $toko['alamat_toko'];?></p>
 						<p>Tanggal : <?php  echo date("j F Y, G:i");?></p>
-						<p>Kasir : <?php  echo $_GET['nm_member'];?></p>
+						<p>Kasir : <?php  echo htmlentities($_GET['nm_member']);?></p>
 					</center>
 					<table class="table table-bordered" style="width:100%;">
 						<tr>
@@ -49,9 +48,9 @@
 						<?php $hasil = $lihat -> jumlah(); ?>
 						Total : Rp.<?php echo number_format($hasil['bayar']);?>,-
 						<br/>
-						Bayar : Rp.<?php echo number_format($_GET['bayar']);?>,-
+						Bayar : Rp.<?php echo number_format(htmlentities($_GET['bayar']));?>,-
 						<br/>
-						Kembali : Rp.<?php echo number_format($_GET['kembali']);?>,-
+						Kembali : Rp.<?php echo number_format(htmlentities($_GET['kembali']));?>,-
 					</div>
 					<div class="clearfix"></div>
 					<center>

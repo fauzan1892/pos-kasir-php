@@ -4,7 +4,7 @@ session_start();
 if (!empty($_SESSION['admin'])) {
     require '../../config.php';
     if (!empty($_GET['kategori'])) {
-        $nama= $_POST['kategori'];
+        $nama= htmlentities(htmlentities($_POST['kategori']));
         $tgl= date("j F Y, G:i");
         $data[] = $nama;
         $data[] = $tgl;
@@ -15,15 +15,15 @@ if (!empty($_SESSION['admin'])) {
     }
 
     if (!empty($_GET['barang'])) {
-        $id = $_POST['id'];
-        $kategori = $_POST['kategori'];
-        $nama = $_POST['nama'];
-        $merk = $_POST['merk'];
-        $beli = $_POST['beli'];
-        $jual = $_POST['jual'];
-        $satuan = $_POST['satuan'];
-        $stok = $_POST['stok'];
-        $tgl = $_POST['tgl'];
+        $id = htmlentities($_POST['id']);
+        $kategori = htmlentities($_POST['kategori']);
+        $nama = htmlentities($_POST['nama']);
+        $merk = htmlentities($_POST['merk']);
+        $beli = htmlentities($_POST['beli']);
+        $jual = htmlentities($_POST['jual']);
+        $satuan = htmlentities($_POST['satuan']);
+        $stok = htmlentities($_POST['stok']);
+        $tgl = htmlentities($_POST['tgl']);
 
         $data[] = $id;
         $data[] = $kategori;
