@@ -16,19 +16,43 @@
 	@ob_start();
 	session_start();
 
-	if(!empty($_SESSION['admin'])){
-		require 'config.php';
-		include $view;
-		$lihat = new view($config);
+        if(!empty($_SESSION['admin'])){
+                require 'config.php';
+                require_once 'fungsi/csrf.php';
+                csrf_get_token();
+                csrf_guard();
+                include $view;
+                $lihat = new view($config);
 		$toko = $lihat -> toko();
 		//  admin
 			include 'admin/template/header.php';
-			include 'admin/template/sidebar.php';
-				if(!empty($_GET['page'])){
-					include 'admin/module/'.$_GET['page'].'/index.php';
-				}else{
-					include 'admin/template/home.php';
-				}
+                        include 'admin/template/sidebar.php';
+                                $allowedPages = array(
+                                        'barang',
+                                        'barang/details',
+                                        'barang/edit',
+                                        'kategori',
+                                        'pengaturan',
+                                        'jual',
+                                        'laporan',
+                                        'user'
+                                );
+                                if(!empty($_GET['page'])){
+                                        $requestedPage = (string) $_GET['page'];
+                                        if(in_array($requestedPage, $allowedPages, true)){
+                                                $moduleRoot = realpath(__DIR__.'/admin/module');
+                                                $modulePath = realpath(__DIR__.'/admin/module/'.$requestedPage.'/index.php');
+                                                if($moduleRoot !== false && $modulePath !== false && strpos($modulePath, $moduleRoot) === 0 && is_file($modulePath)){
+                                                        include $modulePath;
+                                                }else{
+                                                        include 'admin/template/home.php';
+                                                }
+                                        }else{
+                                                include 'admin/template/home.php';
+                                        }
+                                }else{
+                                        include 'admin/template/home.php';
+                                }
 			include 'admin/template/footer.php';
 		// end admin
 	}else{

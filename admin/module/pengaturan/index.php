@@ -7,7 +7,8 @@
 <?php }?>
 <div class="card">
 	<div class="card-body">
-		<form method="post" action="fungsi/edit/edit.php?pengaturan=ubah">
+                <form method="post" action="fungsi/edit/edit.php?pengaturan=ubah">
+                        <?php echo csrf_field(); ?>
 			<div class="row">
 				<div class="col-md 6">
 					<div class="form-group">

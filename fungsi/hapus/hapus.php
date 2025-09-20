@@ -3,6 +3,8 @@
 session_start();
 if (!empty($_SESSION['admin'])) {
     require '../../config.php';
+    require_once __DIR__.'/../csrf.php';
+    csrf_require_token($_GET['csrf_token'] ?? '');
     if (!empty(htmlentities($_GET['kategori']))) {
         $id= htmlentities($_GET['id']);
         $data[] = $id;

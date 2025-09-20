@@ -30,7 +30,8 @@
 				<img src="assets/img/user/<?php echo $hasil['gambar'];?>" alt="#" class="img-fluid w-100" />
 			</div>
 			<div class="card-footer">
-				<form method="POST" action="fungsi/edit/edit.php?gambar=user" enctype="multipart/form-data">
+                                <form method="POST" action="fungsi/edit/edit.php?gambar=user" enctype="multipart/form-data">
+                                        <?php echo csrf_field(); ?>
 					<input type="file" accept="image/*" name="foto">
 					<input type="hidden" value="<?php echo $hasil['gambar'];?>" name="foto2">
 					<input type="hidden" name="id" value="<?php echo $hasil['id_member'];?>">
@@ -49,8 +50,9 @@
 			</div>
 			<div class="card-body">
 				<div class="box-content">
-					<form class="form-horizontal" method="POST" action="fungsi/edit/edit.php?profil=edit"
-						enctype="multipart/form-data">
+                                        <form class="form-horizontal" method="POST" action="fungsi/edit/edit.php?profil=edit"
+                                                enctype="multipart/form-data">
+                                                <?php echo csrf_field(); ?>
 						<fieldset>
 							<div class="control-group mb-3">
 								<label class="control-label" for="typeahead">Nama </label>
@@ -105,7 +107,8 @@
 			</div>
 			<div class="card-body">
 				<div class="box-content">
-					<form class="form-horizontal" method="POST" action="fungsi/edit/edit.php?pass=ganti-pas">
+                                        <form class="form-horizontal" method="POST" action="fungsi/edit/edit.php?pass=ganti-pas">
+                                                <?php echo csrf_field(); ?>
 						<fieldset>
 							<div class="control-group mb-3">
 								<label class="control-label" for="typeahead">Username </label>

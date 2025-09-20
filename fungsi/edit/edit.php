@@ -2,6 +2,8 @@
 session_start();
 if (!empty($_SESSION['admin'])) {
     require '../../config.php';
+    require_once __DIR__.'/../csrf.php';
+    csrf_guard();
     if (!empty($_GET['pengaturan'])) {
         $nama= htmlentities($_POST['namatoko']);
         $alamat = htmlentities($_POST['alamat']);
@@ -80,11 +82,16 @@ if (!empty($_SESSION['admin'])) {
     if (!empty($_GET['gambar'])) {
         $id = htmlentities($_POST['id']);
         set_time_limit(0);
-        $allowedImageType = array("image/gif", "image/JPG", "image/jpeg", "image/pjpeg", "image/png", "image/x-png", 'image/webp');
-        $filepath = $_FILES['foto']['tmp_name'];
-        $fileSize = filesize($filepath);
-        $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
-        $filetype = finfo_file($fileinfo, $filepath);
+        if (!isset($_FILES['foto']) || !is_uploaded_file($_FILES['foto']['tmp_name'])) {
+            echo '<script>alert("Masukan Gambar !");window.location="../../index.php?page=user"</script>';
+            exit;
+        }
+
+        if ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
+            echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
+            exit;
+        }
+
         $allowedTypes = [
             'image/png'   => 'png',
             'image/jpeg'  => 'jpg',
@@ -92,45 +99,54 @@ if (!empty($_SESSION['admin'])) {
             'image/jpg'   => 'jpeg',
             'image/webp'  => 'webp'
         ];
-        if(!in_array($filetype, array_keys($allowedTypes))) {
+
+        $tmpName = $_FILES['foto']['tmp_name'];
+        $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+        if (!$fileinfo) {
             echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
             exit;
-        }else if ($_FILES['foto']["error"] > 0) {
+        }
+
+        $filetype = finfo_file($fileinfo, $tmpName);
+        finfo_close($fileinfo);
+
+        if (!isset($allowedTypes[$filetype])) {
             echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
             exit;
-        } elseif (!in_array($_FILES['foto']["type"], $allowedImageType)) {
-            // echo "You can only upload JPG, PNG and GIF file";
-            // echo "<font face='Verdana' size='2' ><BR><BR><BR>
-            // 		<a href='../../index.php?page=user'>Back to upform</a><BR>";
-            echo '<script>alert("You can only upload JPG, PNG and GIF file");window.location="../../index.php?page=user"</script>';
-            exit;
-        } elseif (round($_FILES['foto']["size"] / 1024) > 4096) {
-            // echo "WARNING !!! Besar Gambar Tidak Boleh Lebih Dari 4 MB";
-            // echo "<font face='Verdana' size='2' ><BR><BR><BR>
-            // 		<a href='../../index.php?page=user'>Back to upform</a><BR>";
+        }
+
+        if (round($_FILES['foto']["size"] / 1024) > 4096) {
             echo '<script>alert("WARNING !!! Besar Gambar Tidak Boleh Lebih Dari 4 MB");window.location="../../index.php?page=user"</script>';
             exit;
-        } else {
-            $dir = '../../assets/img/user/';
-            $tmp_name = $_FILES['foto']['tmp_name'];
-            $name = time().basename($_FILES['foto']['name']);
-            if (move_uploaded_file($tmp_name, $dir.$name)) {
-                //post foto lama
-                $foto2 = $_POST['foto2'];
-                //remove foto di direktori
-                unlink('../../assets/img/user/'.$foto2.'');
-                //input foto
-                $id = $_POST['id'];
-                $data[] = $name;
-                $data[] = $id;
-                $sql = 'UPDATE member SET gambar=?  WHERE member.id_member=?';
-                $row = $config -> prepare($sql);
-                $row -> execute($data);
-                echo '<script>window.location="../../index.php?page=user&success=edit-data"</script>';
-            } else {
-                echo '<script>alert("Masukan Gambar !");window.location="../../index.php?page=user"</script>';
-                exit;
+        }
+
+        $uploadDir = realpath(__DIR__.'/../../assets/img/user');
+        if ($uploadDir === false) {
+            echo '<script>alert("Masukan Gambar !");window.location="../../index.php?page=user"</script>';
+            exit;
+        }
+
+        $uploadDir .= DIRECTORY_SEPARATOR;
+        $name = time().'_'.bin2hex(random_bytes(8)).'.'.$allowedTypes[$filetype];
+
+        if (move_uploaded_file($tmpName, $uploadDir.$name)) {
+            $foto2 = isset($_POST['foto2']) ? basename((string) $_POST['foto2']) : '';
+            if ($foto2 !== '') {
+                $oldFile = $uploadDir.$foto2;
+                if (is_file($oldFile)) {
+                    unlink($oldFile);
+                }
             }
+
+            $data[] = $name;
+            $data[] = $id;
+            $sql = 'UPDATE member SET gambar=?  WHERE member.id_member=?';
+            $row = $config -> prepare($sql);
+            $row -> execute($data);
+            echo '<script>window.location="../../index.php?page=user&success=edit-data"</script>';
+        } else {
+            echo '<script>alert("Masukan Gambar !");window.location="../../index.php?page=user"</script>';
+            exit;
         }
     }
 
@@ -195,37 +211,37 @@ if (!empty($_SESSION['admin'])) {
     }
 
     if (!empty($_GET['cari_barang'])) {
-        $cari = trim(strip_tags($_POST['keyword']));
-        if ($cari == '') {
-        } else {
+        $cari = trim((string) filter_input(INPUT_POST, 'keyword', FILTER_UNSAFE_RAW, FILTER_FLAG_NO_ENCODE_QUOTES));
+        if ($cari !== '') {
+            $param = "%{$cari}%";
             $sql = "select barang.*, kategori.id_kategori, kategori.nama_kategori
-					from barang inner join kategori on barang.id_kategori = kategori.id_kategori
-					where barang.id_barang like '%$cari%' or barang.nama_barang like '%$cari%' or barang.merk like '%$cari%'";
+                                        from barang inner join kategori on barang.id_kategori = kategori.id_kategori
+                                        where barang.id_barang like ? or barang.nama_barang like ? or barang.merk like ?";
             $row = $config -> prepare($sql);
-            $row -> execute();
+            $row -> execute(array($param, $param, $param));
             $hasil1= $row -> fetchAll();
             ?>
-		<table class="table table-stripped" width="100%" id="example2">
-			<tr>
-				<th>ID Barang</th>
-				<th>Nama Barang</th>
-				<th>Merk</th>
-				<th>Harga Jual</th>
-				<th>Aksi</th>
-			</tr>
-		<?php foreach ($hasil1 as $hasil) {?>
-			<tr>
-				<td><?php echo $hasil['id_barang'];?></td>
-				<td><?php echo $hasil['nama_barang'];?></td>
-				<td><?php echo $hasil['merk'];?></td>
-				<td><?php echo $hasil['harga_jual'];?></td>
-				<td>
-				<a href="fungsi/tambah/tambah.php?jual=jual&id=<?php echo $hasil['id_barang'];?>&id_kasir=<?php echo $_SESSION['admin']['id_member'];?>" 
-					class="btn btn-success">
-					<i class="fa fa-shopping-cart"></i></a></td>
-			</tr>
-		<?php }?>
-		</table>
+                <table class="table table-stripped" width="100%" id="example2">
+                        <tr>
+                                <th>ID Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Merk</th>
+                                <th>Harga Jual</th>
+                                <th>Aksi</th>
+                        </tr>
+                <?php foreach ($hasil1 as $hasil) {?>
+                        <tr>
+                                <td><?php echo htmlspecialchars($hasil['id_barang'], ENT_QUOTES, 'UTF-8');?></td>
+                                <td><?php echo htmlspecialchars($hasil['nama_barang'], ENT_QUOTES, 'UTF-8');?></td>
+                                <td><?php echo htmlspecialchars($hasil['merk'], ENT_QUOTES, 'UTF-8');?></td>
+                                <td><?php echo htmlspecialchars($hasil['harga_jual'], ENT_QUOTES, 'UTF-8');?></td>
+                                <td>
+                                <a href="fungsi/tambah/tambah.php?jual=jual&id=<?php echo urlencode($hasil['id_barang']);?>&id_kasir=<?php echo urlencode($_SESSION['admin']['id_member']);?>&csrf_token=<?php echo urlencode(csrf_get_token());?>"
+                                        class="btn btn-success">
+                                        <i class="fa fa-shopping-cart"></i></a></td>
+                        </tr>
+                <?php }?>
+                </table>
 <?php
         }
     }

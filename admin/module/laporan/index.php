@@ -34,7 +34,8 @@
 				<h5 class="card-title mt-2">Cari Laporan Per Bulan</h5>
 			</div>
 			<div class="card-body p-0">
-				<form method="post" action="index.php?page=laporan&cari=ok">
+                                <form method="post" action="index.php?page=laporan&cari=ok">
+                                        <?php echo csrf_field(); ?>
 					<table class="table table-striped">
 						<tr>
 							<th>
@@ -95,7 +96,8 @@
 						</tr>
 					</table>
 				</form>
-				<form method="post" action="index.php?page=laporan&hari=cek">
+                                <form method="post" action="index.php?page=laporan&hari=cek">
+                                        <?php echo csrf_field(); ?>
 					<table class="table table-striped">
 						<tr>
 							<th>
