@@ -1,10 +1,11 @@
 <?php 
+    declare(strict_types=1);
 	@ob_start();
 	session_start();
-        if(empty($_SESSION['admin'])){
-                http_response_code(403);
-                exit('Forbidden');
-        }
+    if (empty($_SESSION['admin'])) {
+        header('Location: login.php');
+        exit;
+    }
     header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
     header("Content-Disposition: attachment; filename=data-laporan-".date('Y-m-d').".xls");  //File name extension was wrong
     header("Expires: 0");
