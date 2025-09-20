@@ -50,8 +50,8 @@
 			<div class="card card-primary">
 				<div class="card-header bg-primary text-white">
 					<h5><i class="fa fa-shopping-cart"></i> KASIR
-					<a class="btn btn-danger float-right" 
-						onclick="javascript:return confirm('Apakah anda ingin reset keranjang ?');" href="fungsi/hapus/hapus.php?penjualan=jual">
+                                        <a class="btn btn-danger float-right"
+                                                onclick="javascript:return confirm('Apakah anda ingin reset keranjang ?');" href="fungsi/hapus/hapus.php?penjualan=jual&csrf_token=<?php echo urlencode(csrf_get_token());?>">
 						<b>RESET KERANJANG</b></a>
 					</h5>
 				</div>
@@ -82,7 +82,8 @@
 									<td><?php echo $isi['nama_barang'];?></td>
 									<td>
 										<!-- aksi ke table penjualan -->
-										<form method="POST" action="fungsi/edit/edit.php?jual=jual">
+                                                                                <form method="POST" action="fungsi/edit/edit.php?jual=jual">
+                                                                                                <?php echo csrf_field(); ?>
 												<input type="number" name="jumlah" value="<?php echo $isi['jumlah'];?>" class="form-control">
 												<input type="hidden" name="id" value="<?php echo $isi['id_penjualan'];?>" class="form-control">
 												<input type="hidden" name="id_barang" value="<?php echo $isi['id_barang'];?>" class="form-control">
@@ -93,8 +94,8 @@
 												<button type="submit" class="btn btn-warning">Update</button>
 										</form>
 										<!-- aksi ke table penjualan -->
-										<a href="fungsi/hapus/hapus.php?jual=jual&id=<?php echo $isi['id_penjualan'];?>&brg=<?php echo $isi['id_barang'];?>
-											&jml=<?php echo $isi['jumlah']; ?>"  class="btn btn-danger"><i class="fa fa-times"></i>
+                                                                                <a href="fungsi/hapus/hapus.php?jual=jual&id=<?php echo $isi['id_penjualan'];?>&brg=<?php echo $isi['id_barang'];?>
+                                                                                        &jml=<?php echo $isi['jumlah']; ?>&csrf_token=<?php echo urlencode(csrf_get_token());?>"  class="btn btn-danger"><i class="fa fa-times"></i>
 										</a>
 									</td>
 								</tr>
@@ -153,7 +154,8 @@
 							}
 							?>
 							<!-- aksi ke table nota -->
-							<form method="POST" action="index.php?page=jual&nota=yes#kasirnya">
+                                                        <form method="POST" action="index.php?page=jual&nota=yes#kasirnya">
+                                                                <?php echo csrf_field(); ?>
 								<?php foreach($hasil_penjualan as $isi){;?>
 									<input type="hidden" name="id_barang[]" value="<?php echo $isi['id_barang'];?>">
 									<input type="hidden" name="id_member[]" value="<?php echo $isi['id_member'];?>">
@@ -170,7 +172,7 @@
 									<td><input type="text" class="form-control" name="bayar" value="<?php echo $bayar;?>"></td>
 									<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
 									<?php  if(!empty($_GET['nota'] == 'yes')) {?>
-										<a class="btn btn-danger" href="fungsi/hapus/hapus.php?penjualan=jual">
+                                                                                <a class="btn btn-danger" href="fungsi/hapus/hapus.php?penjualan=jual&csrf_token=<?php echo urlencode(csrf_get_token());?>">
 										<b>RESET</b></a></td><?php }?></td>
 								</tr>
 							</form>
@@ -180,8 +182,8 @@
 								<td><input type="text" class="form-control" value="<?php echo $hitung;?>"></td>
 								<td></td>
 								<td>
-									<a href="print.php?nm_member=<?php echo $_SESSION['admin']['nm_member'];?>
-									&bayar=<?php echo $bayar;?>&kembali=<?php echo $hitung;?>" target="_blank">
+                                                                        <a href="print.php?nm_member=<?php echo urlencode($_SESSION['admin']['nm_member']);?>
+                                                                        &bayar=<?php echo urlencode($bayar);?>&kembali=<?php echo urlencode($hitung);?>" target="_blank">
 									<button class="btn btn-secondary">
 										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
 									</button></a>
@@ -201,10 +203,10 @@
 // AJAX call for autocomplete 
 $(document).ready(function(){
 	$("#cari").change(function(){
-		$.ajax({
-			type: "POST",
-			url: "fungsi/edit/edit.php?cari_barang=yes",
-			data:'keyword='+$(this).val(),
+                $.ajax({
+                        type: "POST",
+                        url: "fungsi/edit/edit.php?cari_barang=yes",
+                        data:{keyword: $(this).val(), csrf_token: window.csrfToken || ''},
 			beforeSend: function(){
 				$("#hasil_cari").hide();
 				$("#tunggu").html('<p style="color:green"><blink>tunggu sebentar</blink></p>');

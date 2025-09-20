@@ -1,113 +1,103 @@
-## Deskripsi Aplikasi 
-Source Code Aplikasi Penjualan Barang sederhana berbasis Website dengan PHP & MYSQL.
+# POS Codekop v2.0
 
-## DONASI : <a href="https://saweria.co/fauzan1892">https://saweria.co/fauzan1892</a>
+## Deskripsi Umum
+POS Codekop merupakan aplikasi penjualan barang berbasis web yang dibangun menggunakan PHP dan MySQL. Proyek ini menyediakan fitur pengelolaan data barang, kategori, transaksi penjualan, laporan, serta pengaturan kasir dengan antarmuka Bootstrap.
 
-### Source Blog : <a href="https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html">https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html</a>
+## Status Proyek
+Pengembangan aktif aplikasi ini telah dihentikan. Namun, repositori tetap dibuka untuk kontribusi komunitas. Silakan ajukan _pull request_ apabila ingin menambahkan fitur baru, melakukan pemeliharaan, atau memperbaiki permasalahan lainnya.
 
-### Beli Versi Terbaru nya disini : <a href="https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html">https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html</a>
-### Beli Aplikasi POS Cafe Resto : <a href="https://www.codekop.com/products/source-code-aplikasi-pos-kasir-cafe-resto-berbasis-website-4.html">https://www.codekop.com/products/source-code-aplikasi-pos-kasir-cafe-resto-berbasis-website-4.html</a>
-<hr>
-### * Untuk Reuploader Source Code tolong cantumin sumber juga ya, terima kasih :)
+## Klarifikasi Keamanan
+Sebagai tindak lanjut atas laporan kerentanan yang telah dipublikasikan, versi terbaru repositori ini telah mendapatkan perbaikan keamanan dari tim Codex dengan cakupan berikut:
 
-## Setting Koneksi PHP
-setting koneksi di config.php dan ganti username, password dan dbname nya
+- **CVE-2023-36345** – Penambahan perlindungan CSRF pada seluruh alur perubahan data penting.
+- **CVE-2023-36346** – Sanitasi dan _escaping_ parameter untuk mencegah serangan XSS.
+- **CVE-2023-36347** – Pembatasan akses terhadap berkas ekspor agar hanya dapat diunduh oleh pengguna yang sah.
+- **CVE-2023-36348** – Validasi berlapis pada unggahan berkas untuk mencegah eksekusi kode dari file yang tidak sah.
 
-## Penggunaan Login
-Username : admin
-<br/>
-Password : 123
-<br>
-<span style="color:red">* Penggunaan Login untuk <b>single User</b> </span>
+Harap selalu memperbarui instalasi Anda dengan perubahan terbaru dan meninjau ulang konfigurasi server sebelum digunakan di lingkungan produksi.
 
-## Contoh Program V2
-- Login
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/1.png">
+## Donasi
+Dukungan dapat diberikan melalui Saweria: <https://saweria.co/fauzan1892>
 
-- Dashboard 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/2.png">
+## Referensi
+- Artikel sumber: <https://www.codekop.com/read/source-code-aplikasi-penjualan-barang-kasir-dengan-php-amp-mysql-gratis.html>
+- Versi terbaru aplikasi POS: <https://www.codekop.com/products/source-code-aplikasi-pos-penjualan-barang-kasir-dengan-php-mysql-3.html>
+- Aplikasi POS Cafe Resto: <https://www.codekop.com/products/source-code-aplikasi-pos-kasir-cafe-resto-berbasis-website-4.html>
 
-- Tabel Barang
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/3.png">
+_**Catatan:** Bagi pihak yang melakukan unggah ulang (_reupload_) sumber kode ini, mohon cantumkan sumber aslinya._
 
-- Kategori
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/4.png">
+## Konfigurasi Basis Data
+Sesuaikan kredensial koneksi pada `config.php` dengan nama basis data, pengguna, dan kata sandi yang digunakan pada server Anda.
 
-- Keranjang / Transaksi
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/5.png">
+## Kredensial Demo
+- **Nama Pengguna:** `admin`
+- **Kata Sandi:** `123`
+- Login demo diperuntukkan untuk skenario _single user_.
 
-- Laporan 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/6.png">
+## Tangkapan Layar
 
-- Nama Toko 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/7.png">
+### Versi 2.0
+- Halaman Masuk  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/1.png)
+- Dasbor  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/2.png)
+- Tabel Barang  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/3.png)
+- Kategori  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/4.png)
+- Keranjang / Transaksi  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/5.png)
+- Laporan  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/6.png)
+- Nama Toko  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/7.png)
+- Pengaturan Pengguna  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/8.png)
 
-- Atur User 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/picv2/8.png">
+### Versi 1.0
+- Halaman Masuk  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/login.png)
+- Dasbor  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/1.png)
+- Tabel Barang  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/2.png)
+- Keranjang / Transaksi  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/4.png)
+- Laporan  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/5.png)
+- Nama Toko  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/6.png)
+- Pengaturan Pengguna  
+  ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/7.png)
 
-## Contoh Program V1
-- Login
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/login.png">
+## Riwayat Perubahan
+- **12 Desember 2022**  
+  - Rilis versi 2.0.  
+  - Migrasi ke template SB Admin 2 Bootstrap 4.
+- **31 Januari 2021**  
+  - Penambahan sortir stok kurang dari &ge; 3.  
+  - Pencarian laporan per tanggal dan per bulan.  
+  - Perbaikan perhitungan laporan.
+- **06 Oktober 2020**  
+  - Perbaikan galat sesi pada lingkungan hosting.  
+  - Pembaruan tampilan login dan header tabel.  
+  - Penyesuaian transaksi agar stok yang lebih kecil dari keranjang tidak dapat diproses.  
+  - Penghapusan _trigger_ SQL dan pengurangan stok otomatis setelah transaksi bayar.
+- **23 Agustus 2020**  
+  - Revisi modul cetak.  
+  - Penambahan pemberitahuan transaksi telah dibayar.
+- **18 Juli 2020**  
+  - Perbaikan fitur edit kategori dan formulir tambah barang.  
+  - Perapihan formulir laporan.
+- **29 Agustus 2019**  
+  - Perbaikan tampilan laporan.  
+  - Memastikan transaksi yang dibayar tercatat pada laporan.  
+  - Pencarian barang otomatis dengan dukungan jQuery Ajax.  
+  - Laporan dapat difilter per bulan dan tahun.
 
-- Dashboard 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/1.png">
+## Kontributor
+- [Fauzan Falah](https://fauzan.codekop.com/)
 
-- Tabel Barang
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/2.png">
+Blog resmi: <https://www.codekop.com/>
 
-- Keranjang / Transaksi
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/4.png">
-
-- Laporan 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/5.png">
-
-- Nama Toko 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/6.png">
-
-- Atur User 
-<img src="https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/7.png">
-
-## Changelog
-12 Desember 2022<br>
-- Update v2.0
-- Migrasi Template SB Admin 2 Bootstrap 4
-
-31 Januari 2021<br>
-- Tambah Sortir khusus stok kurang dari >= 3
-- Cari Per Tanggal Laporan 
-- Cari Per bulan Laporan
-- Fix Perhitungan Laporan
-
-06 Oktober 2020<br>
-- revisi session error pada hosting dengan error : 
-Warning: session_start(): Cannot send session cookie - headers already sent by (output started at [duplicate] -> fixed
-- Ganti background login, header
-- Ganti Header table barang, table keranjang, table laporan
-- Fix transaksi -> transaksi stok < keranjang tidak bisa diproses
-- penghapusan trigger sql
-- penambahan fungsi transaksi untuk pengurangan stok barang setelah transaksi bayar 
-
-23 Agustus 2020<br>
-- revisi print
-- menambahkan alert telah di bayar di bagian bayar transaksi penjualan
-
-18 Juli 2020<br>
-- fix edit kategori
-- fix modal tambah barang
-- rapihin form laporan
-
-29 Agustus 2019 <br>
-- laporan tampilan error  -> fixed
-- klik button bayar transaksi  tidak masuk ke laporan -> fixed
-- pencarian barang pada menu transaksi sudah otomatis dengan tambahan jquery ajax
-- data laporan dapat dicari berdasarkan periode bulan dan tahun
-
-<br>
-** Jika ada issues atau revisi atau menambahkan fitur silahkan pull request di repository ini
-
-## Contributors
-<a href="https://fauzan.codekop.com/"> Fauzan Falah</a>
-
-My Blog : <a href="https://www.codekop.com/"> Codekop.com</a>
-
-Gunakan Aplikasi dengan bijak, dan Selamat Belajar
+Gunakan aplikasi dengan bijak dan selamat belajar.

@@ -62,52 +62,54 @@
 						$totalBeli = 0;
 						$totalJual = 0;
 						$totalStok = 0;
-						if($_GET['stok'] == 'yes')
-						{
-							$hasil = $lihat -> barang_stok();
+                                                $stokFilter = isset($_GET['stok']) && $_GET['stok'] === 'yes';
+                                                if($stokFilter)
+                                                {
+                                                        $hasil = $lihat -> barang_stok();
 
-						}else{
-							$hasil = $lihat -> barang();
-						}
+                                                }else{
+                                                        $hasil = $lihat -> barang();
+                                                }
 						$no=1;
 						foreach($hasil as $isi) {
 					?>
                         <tr>
                             <td><?php echo $no;?></td>
-                            <td><?php echo $isi['id_barang'];?></td>
-                            <td><?php echo $isi['nama_kategori'];?></td>
-                            <td><?php echo $isi['nama_barang'];?></td>
-                            <td><?php echo $isi['merk'];?></td>
+                            <td><?php echo htmlspecialchars($isi['id_barang'], ENT_QUOTES, 'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($isi['nama_kategori'], ENT_QUOTES, 'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($isi['nama_barang'], ENT_QUOTES, 'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($isi['merk'], ENT_QUOTES, 'UTF-8');?></td>
                             <td>
                                 <?php if($isi['stok'] == '0'){?>
                                 <button class="btn btn-danger"> Habis</button>
                                 <?php }else{?>
-                                <?php echo $isi['stok'];?>
+                                <?php echo htmlspecialchars($isi['stok'], ENT_QUOTES, 'UTF-8');?>
                                 <?php }?>
                             </td>
                             <td>Rp.<?php echo number_format($isi['harga_beli']);?>,-</td>
                             <td>Rp.<?php echo number_format($isi['harga_jual']);?>,-</td>
-                            <td> <?php echo $isi['satuan_barang'];?></td>
+                            <td> <?php echo htmlspecialchars($isi['satuan_barang'], ENT_QUOTES, 'UTF-8');?></td>
                             <td>
                                 <?php if($isi['stok'] <=  '3'){?>
                                 <form method="POST" action="fungsi/edit/edit.php?stok=edit">
+                                    <?php echo csrf_field(); ?>
                                     <input type="text" name="restok" class="form-control">
-                                    <input type="hidden" name="id" value="<?php echo $isi['id_barang'];?>"
+                                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($isi['id_barang'], ENT_QUOTES, 'UTF-8');?>"
                                         class="form-control">
                                     <button class="btn btn-primary btn-sm">
                                         Restok
                                     </button>
-                                    <a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>"
+                                    <a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo urlencode($isi['id_barang']);?>&csrf_token=<?php echo urlencode(csrf_get_token());?>"
                                         onclick="javascript:return confirm('Hapus Data barang ?');">
                                         <button class="btn btn-danger btn-sm">Hapus</button></a>
                                 </form>
                                 <?php }else{?>
-                                <a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button
+                                <a href="index.php?page=barang/details&barang=<?php echo urlencode($isi['id_barang']);?>"><button
                                         class="btn btn-primary btn-xs">Details</button></a>
 
-                                <a href="index.php?page=barang/edit&barang=<?php echo $isi['id_barang'];?>"><button
+                                <a href="index.php?page=barang/edit&barang=<?php echo urlencode($isi['id_barang']);?>"><button
                                         class="btn btn-warning btn-xs">Edit</button></a>
-                                <a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>"
+                                <a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo urlencode($isi['id_barang']);?>&csrf_token=<?php echo urlencode(csrf_get_token());?>"
                                     onclick="javascript:return confirm('Hapus Data barang ?');"><button
                                         class="btn btn-danger btn-xs">Hapus</button></a>
                                 <?php }?>
@@ -145,6 +147,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <form action="fungsi/tambah/tambah.php?barang=tambah" method="POST">
+                        <?php echo csrf_field(); ?>
                         <div class="modal-body">
                             <table class="table table-striped bordered">
                                 <?php
