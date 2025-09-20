@@ -23,6 +23,7 @@
 	$edit = $row->fetch();
 ?>
 <form method="POST" action="fungsi/edit/edit.php?kategori=edit">
+    <?php echo csrf_field(); ?>
     <table>
         <tr>
             <td style="width:25pc;"><input type="text" class="form-control" value="<?= $edit['nama_kategori'];?>"
@@ -36,6 +37,7 @@
 </form>
 <?php }else{?>
 <form method="POST" action="fungsi/tambah/tambah.php?kategori=tambah">
+    <?php echo csrf_field(); ?>
     <table>
         <tr>
             <td style="width:25pc;"><input type="text" class="form-control" required name="kategori"
@@ -71,7 +73,7 @@
                     <td>
                         <a href="index.php?page=kategori&uid=<?php echo $isi['id_kategori'];?>"><button
                                 class="btn btn-warning">Edit</button></a>
-                        <a href="fungsi/hapus/hapus.php?kategori=hapus&id=<?php echo $isi['id_kategori'];?>"
+                        <a href="fungsi/hapus/hapus.php?kategori=hapus&id=<?php echo $isi['id_kategori'];?>&csrf_token=<?php echo urlencode(csrf_get_token());?>"
                             onclick="javascript:return confirm('Hapus Data Kategori ?');"><button
                                 class="btn btn-danger">Hapus</button></a>
                     </td>

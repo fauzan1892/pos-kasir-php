@@ -26,6 +26,11 @@
     <script src="sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <?php if (function_exists('csrf_get_token')): ?>
+    <script>
+        window.csrfToken = '<?php echo htmlspecialchars(csrf_get_token(), ENT_QUOTES, 'UTF-8'); ?>';
+    </script>
+    <?php endif; ?>
 </head>
 
 <body id="page-top">

@@ -85,11 +85,12 @@ class view
 
     public function barang_cari($cari)
     {
+        $param = "%{$cari}%";
         $sql = "select barang.*, kategori.id_kategori, kategori.nama_kategori
                 from barang inner join kategori on barang.id_kategori = kategori.id_kategori
-                where id_barang like '%$cari%' or nama_barang like '%$cari%' or merk like '%$cari%'";
+                where id_barang like ? or nama_barang like ? or merk like ?";
         $row = $this-> db -> prepare($sql);
-        $row -> execute();
+        $row -> execute(array($param, $param, $param));
         $hasil = $row -> fetchAll();
         return $hasil;
     }
