@@ -3,6 +3,8 @@
 session_start();
 if (!empty($_SESSION['admin'])) {
     require '../../config.php';
+    require_once __DIR__.'/../csrf.php';
+    csrf_guard();
     if (!empty($_GET['kategori'])) {
         $nama= htmlentities(htmlentities($_POST['kategori']));
         $tgl= date("j F Y, G:i");
@@ -42,6 +44,7 @@ if (!empty($_SESSION['admin'])) {
     }
     
     if (!empty($_GET['jual'])) {
+        csrf_require_token($_GET['csrf_token'] ?? '');
         $id = $_GET['id'];
 
         // get tabel barang id_barang
