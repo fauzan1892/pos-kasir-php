@@ -1,4 +1,4 @@
-# POS Codekop V2 – CVE Fixed & Secure
+# POS Codekop v2.0 – CVE Fixed & Secure
 
 ## Deskripsi Umum
 POS Codekop merupakan aplikasi penjualan barang berbasis web yang dibangun menggunakan PHP dan MySQL. Proyek ini menyediakan fitur pengelolaan data barang, kategori, transaksi penjualan, laporan, serta pengaturan kasir dengan antarmuka Bootstrap.
