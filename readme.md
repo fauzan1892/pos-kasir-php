@@ -1,4 +1,4 @@
-# POS Codekop v2.0
+# POS Codekop V2 – CVE Fixed & Secure
 
 ## Deskripsi Umum
 POS Codekop merupakan aplikasi penjualan barang berbasis web yang dibangun menggunakan PHP dan MySQL. Proyek ini menyediakan fitur pengelolaan data barang, kategori, transaksi penjualan, laporan, serta pengaturan kasir dengan antarmuka Bootstrap.
@@ -71,8 +71,12 @@ Sesuaikan kredensial koneksi pada `config.php` dengan nama basis data, pengguna,
   ![](https://raw.githubusercontent.com/fauzan1892/pos-kasir-php/master/assets/img/pic/7.png)
 
 ## Riwayat Perubahan
-- **12 Desember 2022**  
-  - Rilis versi 2.0.  
+- **20 September 2025**
+  - Pembaruan dokumentasi untuk menjelaskan status pemeliharaan dan klarifikasi keamanan terkini.
+  - Penambahan mitigasi kerentanan CVE-2023-36345 hingga CVE-2023-36348 melalui validasi input, pembatasan akses, dan perlindungan CSRF.
+  - Penyeragaman tampilan cetak struk agar kompatibel dengan printer thermal serta pengetatan sanitasi data cetak.
+- **12 Desember 2022**
+  - Rilis versi 2.0.
   - Migrasi ke template SB Admin 2 Bootstrap 4.
 - **31 Januari 2021**  
   - Penambahan sortir stok kurang dari &ge; 3.  
