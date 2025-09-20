@@ -1,5 +1,5 @@
-# POS Codekop v2.0 – CVE Fixed & Secure
-
+# POS Codekop v2.0
+## CVE Fixed
 ## Deskripsi Umum
 POS Codekop v2.0 adalah aplikasi kasir (point of sale) berbasis PHP dan MySQL yang dirancang untuk membantu usaha ritel skala kecil mengelola penjualan harian. Kode sumber ini terbuka untuk dipelajari, dimodifikasi, dan disesuaikan sehingga cocok digunakan sebagai bahan belajar pengembangan web maupun pondasi proyek POS ringan.
 
