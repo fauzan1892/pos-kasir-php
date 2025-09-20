@@ -29,6 +29,23 @@
         '11'=>"November",
         '12'=>"Desember"
     );
+
+    $cariParamRaw = filter_input(INPUT_GET, 'cari', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+    $cariParam = is_string($cariParamRaw) ? trim($cariParamRaw) : '';
+    $cariActive = in_array($cariParam, ['yes', 'ok'], true);
+
+    $hariParamRaw = filter_input(INPUT_GET, 'hari', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+    $hariParam = is_string($hariParamRaw) ? trim($hariParamRaw) : '';
+    $hariActive = ($hariParam === 'cek');
+
+    $bulanRaw = filter_input(INPUT_GET, 'bln', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+    $bulanParam = (is_string($bulanRaw) && preg_match('/^(0[1-9]|1[0-2])$/', $bulanRaw)) ? $bulanRaw : '';
+
+    $tahunRaw = filter_input(INPUT_GET, 'thn', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+    $tahunParam = (is_string($tahunRaw) && preg_match('/^\d{4}$/', $tahunRaw)) ? $tahunRaw : '';
+
+    $tanggalRaw = filter_input(INPUT_GET, 'tgl', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+    $tanggalParam = (is_string($tanggalRaw) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggalRaw)) ? $tanggalRaw : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,16 +55,16 @@
     <title>Document</title>
 </head>
 <body>
-	<!-- view barang -->	
-    <!-- view barang -->	
+        <!-- view barang -->
+    <!-- view barang -->
     <div class="modal-view">
-        <h3 style="text-align:center;"> 
-                <?php if(!empty(htmlentities($_GET['cari']))){ ?>
-                    Data Laporan Penjualan <?= $bulan_tes[htmlentities($_GET['bln'])];?> <?= htmlentities($_GET['thn']);?>
-                <?php }elseif(!empty(htmlentities($_GET['hari']))){?>
-                    Data Laporan Penjualan <?= htmlentities($_GET['tgl']);?>
+        <h3 style="text-align:center;">
+                <?php if($cariActive && $bulanParam !== '' && $tahunParam !== ''){ ?>
+                    Data Laporan Penjualan <?= htmlspecialchars($bulan_tes[$bulanParam] ?? $bulanParam, ENT_QUOTES, 'UTF-8');?> <?= htmlspecialchars($tahunParam, ENT_QUOTES, 'UTF-8');?>
+                <?php }elseif($hariActive && $tanggalParam !== ''){?>
+                    Data Laporan Penjualan <?= htmlspecialchars($tanggalParam, ENT_QUOTES, 'UTF-8');?>
                 <?php }else{?>
-                    Data Laporan Penjualan <?= $bulan_tes[date('m')];?> <?= date('Y');?>
+                    Data Laporan Penjualan <?= htmlspecialchars($bulan_tes[date('m')], ENT_QUOTES, 'UTF-8');?> <?= date('Y');?>
                 <?php }?>
         </h3>
         <table border="1" width="100%" cellpadding="3" cellspacing="4">
@@ -64,22 +81,19 @@
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                    $no=1; 
-                    if(!empty(htmlentities($_GET['cari']))){
-                        $periode = htmlentities($_GET['bln']).'-'.htmlentities($_GET['thn']);
-                        $no=1; 
+                <?php
+                    $no=1;
+                    if($cariActive && $bulanParam !== '' && $tahunParam !== ''){
+                        $periode = $bulanParam.'-'.$tahunParam;
                         $jumlah = 0;
                         $bayar = 0;
-                        $hasil = $lihat -> periode_jual($periode);
-                    }elseif(!empty(htmlentities($_GET['hari']))){
-                        $hari = htmlentities($_GET['tgl']);
-                        $no=1; 
+                        $hasil = $lihat->periode_jual($periode);
+                    }elseif($hariActive && $tanggalParam !== ''){
                         $jumlah = 0;
                         $bayar = 0;
-                        $hasil = $lihat -> hari_jual($hari);
+                        $hasil = $lihat->hari_jual($tanggalParam);
                     }else{
-                        $hasil = $lihat -> jual();
+                        $hasil = $lihat->jual();
                     }
                 ?>
                 <?php 
@@ -93,13 +107,13 @@
                 ?>
                 <tr>
                     <td><?php echo $no;?></td>
-                    <td><?php echo $isi['id_barang'];?></td>
-                    <td><?php echo $isi['nama_barang'];?></td>
-                    <td><?php echo $isi['jumlah'];?> </td>
+                    <td><?= htmlspecialchars($isi['id_barang'], ENT_QUOTES, 'UTF-8');?></td>
+                    <td><?= htmlspecialchars($isi['nama_barang'], ENT_QUOTES, 'UTF-8');?></td>
+                    <td><?= htmlspecialchars($isi['jumlah'], ENT_QUOTES, 'UTF-8');?> </td>
                     <td>Rp.<?php echo number_format($isi['harga_beli']* $isi['jumlah']);?>,-</td>
                     <td>Rp.<?php echo number_format($isi['total']);?>,-</td>
-                    <td><?php echo $isi['nm_member'];?></td>
-                    <td><?php echo $isi['tanggal_input'];?></td>
+                    <td><?= htmlspecialchars($isi['nm_member'], ENT_QUOTES, 'UTF-8');?></td>
+                    <td><?= htmlspecialchars($isi['tanggal_input'], ENT_QUOTES, 'UTF-8');?></td>
                 </tr>
                 <?php $no++; }?>
                 <tr>

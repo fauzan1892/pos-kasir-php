@@ -5,7 +5,8 @@
       *********************************************************************************************************************************************************** -->
  <!--main content start-->
  <?php
-        $idParam = isset($_GET['barang']) ? preg_replace('/[^A-Za-z0-9-]/', '', $_GET['barang']) : '';
+        $barangParamRaw = filter_input(INPUT_GET, 'barang', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $idParam = (is_string($barangParamRaw) && preg_match('/^[A-Za-z0-9-]+$/', $barangParamRaw)) ? $barangParamRaw : '';
         $hasil = $lihat -> barang_edit($idParam);
         if (!$hasil) {
                 echo '<div class="alert alert-danger">Data barang tidak ditemukan.</div>';

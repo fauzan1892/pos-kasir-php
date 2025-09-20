@@ -1,16 +1,29 @@
+<?php
+        $successStokParam = filter_input(INPUT_GET, 'success-stok', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $showSuccessStok = is_string($successStokParam) && $successStokParam !== '';
+
+        $successParam = filter_input(INPUT_GET, 'success', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $showSuccess = is_string($successParam) && $successParam !== '';
+
+        $removeParam = filter_input(INPUT_GET, 'remove', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $showRemove = is_string($removeParam) && $removeParam !== '';
+
+        $stokParam = filter_input(INPUT_GET, 'stok', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $stokFilter = ($stokParam === 'yes');
+?>
         <h4>Data Barang</h4>
         <br />
-        <?php if(isset($_GET['success-stok'])){?>
+        <?php if($showSuccessStok){?>
         <div class="alert alert-success">
             <p>Tambah Stok Berhasil !</p>
         </div>
         <?php }?>
-        <?php if(isset($_GET['success'])){?>
+        <?php if($showSuccess){?>
         <div class="alert alert-success">
             <p>Tambah Data Berhasil !</p>
         </div>
         <?php }?>
-        <?php if(isset($_GET['remove'])){?>
+        <?php if($showRemove){?>
         <div class="alert alert-danger">
             <p>Hapus Data Berhasil !</p>
         </div>
@@ -18,16 +31,17 @@
 
         <?php 
 			$sql=" select * from barang where stok <= 3";
-			$row = $config -> prepare($sql);
-			$row -> execute();
-			$r = $row -> rowCount();
-			if($r > 0){
-				echo "
-				<div class='alert alert-warning'>
-					<span class='glyphicon glyphicon-info-sign'></span> Ada <span style='color:red'>$r</span> barang yang Stok tersisa sudah kurang dari 3 items. silahkan pesan lagi !!
-					<span class='pull-right'><a href='index.php?page=barang&stok=yes'>Cek Barang <i class='fa fa-angle-double-right'></i></a></span>
-				</div>
-				";	
+                        $row = $config -> prepare($sql);
+                        $row -> execute();
+                        $r = (int) $row -> rowCount();
+                        if($r > 0){
+                                $rSafe = htmlspecialchars((string) $r, ENT_QUOTES, 'UTF-8');
+                                echo "
+                                <div class='alert alert-warning'>
+                                        <span class='glyphicon glyphicon-info-sign'></span> Ada <span style='color:red'>$rSafe</span> barang yang Stok tersisa sudah kurang dari 3 items. silahkan pesan lagi !!
+                                        <span class='pull-right'><a href='index.php?page=barang&stok=yes'>Cek Barang <i class='fa fa-angle-double-right'></i></a></span>
+                                </div>
+                                ";
 			}
 		?>
         <!-- Trigger the modal with a button -->
@@ -62,7 +76,6 @@
 						$totalBeli = 0;
 						$totalJual = 0;
 						$totalStok = 0;
-                                                $stokFilter = isset($_GET['stok']) && $_GET['stok'] === 'yes';
                                                 if($stokFilter)
                                                 {
                                                         $hasil = $lihat -> barang_stok();
@@ -155,7 +168,7 @@
 								?>
                                 <tr>
                                     <td>ID Barang</td>
-                                    <td><input type="text" readonly="readonly" required value="<?php echo $format;?>"
+                                    <td><input type="text" readonly="readonly" required value="<?= htmlspecialchars($format, ENT_QUOTES, 'UTF-8'); ?>"
                                             class="form-control" name="id"></td>
                                 </tr>
                                 <tr>
@@ -163,9 +176,9 @@
                                     <td>
                                         <select name="kategori" class="form-control" required>
                                             <option value="#">Pilih Kategori</option>
-                                            <?php  $kat = $lihat -> kategori(); foreach($kat as $isi){ 	?>
-                                            <option value="<?php echo $isi['id_kategori'];?>">
-                                                <?php echo $isi['nama_kategori'];?></option>
+                                            <?php $kat = $lihat -> kategori(); foreach($kat as $isi){ 	?>
+                                            <option value="<?= htmlspecialchars($isi['id_kategori'], ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?= htmlspecialchars($isi['nama_kategori'], ENT_QUOTES, 'UTF-8'); ?></option>
                                             <?php }?>
                                         </select>
                                     </td>
