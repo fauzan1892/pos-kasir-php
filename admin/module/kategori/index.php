@@ -1,34 +1,47 @@
+<?php
+$successParam = filter_input(INPUT_GET, 'success', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+$showSuccess = is_string($successParam) && $successParam !== '';
+
+$successEditParam = filter_input(INPUT_GET, 'success-edit', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+$showSuccessEdit = is_string($successEditParam) && $successEditParam !== '';
+
+$removeParam = filter_input(INPUT_GET, 'remove', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+$showRemove = is_string($removeParam) && $removeParam !== '';
+
+$uidParamRaw = filter_input(INPUT_GET, 'uid', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+$uidParam = (is_string($uidParamRaw) && ctype_digit($uidParamRaw)) ? $uidParamRaw : '';
+?>
 <h4>Kategori</h4>
 <br />
-<?php if(isset($_GET['success'])){?>
+<?php if($showSuccess){?>
 <div class="alert alert-success">
     <p>Tambah Data Berhasil !</p>
 </div>
 <?php }?>
-<?php if(isset($_GET['success-edit'])){?>
+<?php if($showSuccessEdit){?>
 <div class="alert alert-success">
     <p>Update Data Berhasil !</p>
 </div>
 <?php }?>
-<?php if(isset($_GET['remove'])){?>
+<?php if($showRemove){?>
 <div class="alert alert-danger">
     <p>Hapus Data Berhasil !</p>
 </div>
 <?php }?>
-<?php 
-	if(!empty($_GET['uid'])){
-	$sql = "SELECT * FROM kategori WHERE id_kategori = ?";
-	$row = $config->prepare($sql);
-	$row->execute(array($_GET['uid']));
-	$edit = $row->fetch();
+<?php
+        if($uidParam !== ''){
+        $sql = "SELECT * FROM kategori WHERE id_kategori = ?";
+        $row = $config->prepare($sql);
+        $row->execute(array($uidParam));
+        $edit = $row->fetch();
 ?>
 <form method="POST" action="fungsi/edit/edit.php?kategori=edit">
     <?php echo csrf_field(); ?>
     <table>
         <tr>
-            <td style="width:25pc;"><input type="text" class="form-control" value="<?= $edit['nama_kategori'];?>"
+            <td style="width:25pc;"><input type="text" class="form-control" value="<?= htmlspecialchars($edit['nama_kategori'] ?? '', ENT_QUOTES, 'UTF-8');?>"
                     required name="kategori" placeholder="Masukan Kategori Barang Baru">
-                <input type="hidden" name="id" value="<?= $edit['id_kategori'];?>">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($edit['id_kategori'] ?? '', ENT_QUOTES, 'UTF-8');?>">
             </td>
             <td style="padding-left:10px;"><button id="tombol-simpan" class="btn btn-primary"><i class="fa fa-edit"></i>
                     Ubah Data</button></td>
@@ -68,12 +81,12 @@
 			?>
                 <tr>
                     <td><?php echo $no;?></td>
-                    <td><?php echo $isi['nama_kategori'];?></td>
-                    <td><?php echo $isi['tgl_input'];?></td>
+                    <td><?= htmlspecialchars($isi['nama_kategori'], ENT_QUOTES, 'UTF-8');?></td>
+                    <td><?= htmlspecialchars($isi['tgl_input'], ENT_QUOTES, 'UTF-8');?></td>
                     <td>
-                        <a href="index.php?page=kategori&uid=<?php echo $isi['id_kategori'];?>"><button
+                        <a href="index.php?page=kategori&uid=<?= urlencode($isi['id_kategori']);?>"><button
                                 class="btn btn-warning">Edit</button></a>
-                        <a href="fungsi/hapus/hapus.php?kategori=hapus&id=<?php echo $isi['id_kategori'];?>&csrf_token=<?php echo urlencode(csrf_get_token());?>"
+                        <a href="fungsi/hapus/hapus.php?kategori=hapus&id=<?= urlencode($isi['id_kategori']);?>&csrf_token=<?= urlencode(csrf_get_token());?>"
                             onclick="javascript:return confirm('Hapus Data Kategori ?');"><button
                                 class="btn btn-danger">Hapus</button></a>
                     </td>

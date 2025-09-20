@@ -1,6 +1,10 @@
+<?php
+$successParam = filter_input(INPUT_GET, 'success', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+$showSuccess = is_string($successParam) && $successParam !== '';
+?>
 <h4>Pengaturan Toko</h4>
 <br>
-<?php if(isset($_GET['success'])){?>
+<?php if($showSuccess){?>
 <div class="alert alert-success">
 	<p>Ubah Data Berhasil !</p>
 </div>
@@ -13,24 +17,24 @@
 				<div class="col-md 6">
 					<div class="form-group">
 						<label for="">Nama Toko</label>
-						<input class="form-control" name="namatoko" value="<?php echo $toko['nama_toko'];?>"
+						<input class="form-control" name="namatoko" value="<?= htmlspecialchars($toko['nama_toko'] ?? '', ENT_QUOTES, 'UTF-8');?>"
 									placeholder="Nama Toko">
 					</div>
 					<div class="form-group">
 						<label for="">Alamat Toko</label>
-						<input class="form-control" name="alamat" value="<?php echo $toko['alamat_toko'];?>"
+						<input class="form-control" name="alamat" value="<?= htmlspecialchars($toko['alamat_toko'] ?? '', ENT_QUOTES, 'UTF-8');?>"
 									placeholder="Alamat Toko">
 					</div>
 				</div>
 				<div class="col-md 6">
 					<div class="form-group">
 						<label for="">Kontak (Hp)</label>
-						<input class="form-control" name="kontak" value="<?php echo $toko['tlp'];?>"
+						<input class="form-control" name="kontak" value="<?= htmlspecialchars($toko['tlp'] ?? '', ENT_QUOTES, 'UTF-8');?>"
 									placeholder="Kontak (Hp)">
 					</div>
 					<div class="form-group">
 						<label for="">Nama Pemilik Toko</label>
-						<input class="form-control" name="pemilik" value="<?php echo $toko['nama_pemilik'];?>"
+						<input class="form-control" name="pemilik" value="<?= htmlspecialchars($toko['nama_pemilik'] ?? '', ENT_QUOTES, 'UTF-8');?>"
 									placeholder="Nama Pemilik Toko">
 					</div>
 				</div>

@@ -1,18 +1,33 @@
- <?php 
-	$bulan_tes =array(
-		'01'=>"Januari",
-		'02'=>"Februari",
-		'03'=>"Maret",
-		'04'=>"April",
-		'05'=>"Mei",
-		'06'=>"Juni",
-		'07'=>"Juli",
-		'08'=>"Agustus",
-		'09'=>"September",
-		'10'=>"Oktober",
-		'11'=>"November",
-		'12'=>"Desember"
-	);
+ <?php
+        $bulan_tes =array(
+                '01'=>"Januari",
+                '02'=>"Februari",
+                '03'=>"Maret",
+                '04'=>"April",
+                '05'=>"Mei",
+                '06'=>"Juni",
+                '07'=>"Juli",
+                '08'=>"Agustus",
+                '09'=>"September",
+                '10'=>"Oktober",
+                '11'=>"November",
+                '12'=>"Desember"
+        );
+
+        $cariParamRaw = filter_input(INPUT_GET, 'cari', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $cariActive = is_string($cariParamRaw) && $cariParamRaw !== '';
+
+        $hariParamRaw = filter_input(INPUT_GET, 'hari', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $hariActive = ($hariParamRaw === 'cek');
+
+        $bulanPostRaw = filter_input(INPUT_POST, 'bln', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $bulanPost = (is_string($bulanPostRaw) && preg_match('/^(0[1-9]|1[0-2])$/', $bulanPostRaw)) ? $bulanPostRaw : '';
+
+        $tahunPostRaw = filter_input(INPUT_POST, 'thn', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $tahunPost = (is_string($tahunPostRaw) && preg_match('/^\d{4}$/', $tahunPostRaw)) ? $tahunPostRaw : '';
+
+        $hariPostRaw = filter_input(INPUT_POST, 'hari', FILTER_UNSAFE_RAW, ['flags' => FILTER_FLAG_NO_ENCODE_QUOTES]);
+        $hariPost = is_string($hariPostRaw) ? trim($hariPostRaw) : '';
 ?>
 <div class="row">
 	<div class="col-md-12">
@@ -20,13 +35,13 @@
 			<!--<a  style="padding-left:2pc;" href="fungsi/hapus/hapus.php?laporan=jual" onclick="javascript:return confirm('Data Laporan akan di Hapus ?');">
 						<button class="btn btn-danger">RESET</button>
 					</a>-->
-			<?php if(!empty($_GET['cari'])){ ?>
-			Data Laporan Penjualan <?= $bulan_tes[$_POST['bln']];?> <?= $_POST['thn'];?>
-			<?php }elseif(!empty($_GET['hari'])){?>
-			Data Laporan Penjualan <?= $_POST['hari'];?>
-			<?php }else{?>
-			Data Laporan Penjualan <?= $bulan_tes[date('m')];?> <?= date('Y');?>
-			<?php }?>
+                        <?php if($cariActive && $bulanPost !== '' && $tahunPost !== ''){ ?>
+                        Data Laporan Penjualan <?= htmlspecialchars($bulan_tes[$bulanPost] ?? $bulanPost, ENT_QUOTES, 'UTF-8');?> <?= htmlspecialchars($tahunPost, ENT_QUOTES, 'UTF-8');?>
+                        <?php }elseif($hariActive && $hariPost !== ''){?>
+                        Data Laporan Penjualan <?= htmlspecialchars($hariPost, ENT_QUOTES, 'UTF-8');?>
+                        <?php }else{?>
+                        Data Laporan Penjualan <?= htmlspecialchars($bulan_tes[date('m')], ENT_QUOTES, 'UTF-8');?> <?= date('Y');?>
+                        <?php }?>
 		</h4>
 		<br />
 		<div class="card">
@@ -84,10 +99,10 @@
 								<a href="index.php?page=laporan" class="btn btn-success">
 									<i class="fa fa-refresh"></i> Refresh</a>
 
-								<?php if(!empty($_GET['cari'])){?>
-								<a href="excel.php?cari=yes&bln=<?=$_POST['bln'];?>&thn=<?=$_POST['thn'];?>"
-									class="btn btn-info"><i class="fa fa-download"></i>
-									Excel</a>
+                                                                <?php if($cariActive && $bulanPost !== '' && $tahunPost !== ''){?>
+                                                                <a href="excel.php?cari=yes&bln=<?= urlencode($bulanPost);?>&thn=<?= urlencode($tahunPost);?>"
+                                                                        class="btn btn-info"><i class="fa fa-download"></i>
+                                                                        Excel</a>
 								<?php }else{?>
 								<a href="excel.php" class="btn btn-info"><i class="fa fa-download"></i>
 									Excel</a>
@@ -119,10 +134,10 @@
 								<a href="index.php?page=laporan" class="btn btn-success">
 									<i class="fa fa-refresh"></i> Refresh</a>
 
-								<?php if(!empty($_GET['hari'])){?>
-								<a href="excel.php?hari=cek&tgl=<?= $_POST['hari'];?>" class="btn btn-info"><i
-										class="fa fa-download"></i>
-									Excel</a>
+                                                                <?php if($hariActive && $hariPost !== ''){?>
+                                                                <a href="excel.php?hari=cek&tgl=<?= urlencode($hariPost);?>" class="btn btn-info"><i
+                                                                                class="fa fa-download"></i>
+                                                                        Excel</a>
 								<?php }else{?>
 								<a href="excel.php" class="btn btn-info"><i class="fa fa-download"></i>
 									Excel</a>
@@ -155,14 +170,14 @@
 						<tbody>
 							<?php 
 								$no=1; 
-								if(!empty($_GET['cari'])){
-									$periode = $_POST['bln'].'-'.$_POST['thn'];
-									$no=1; 
-									$jumlah = 0;
-									$bayar = 0;
-									$hasil = $lihat -> periode_jual($periode);
-								}elseif(!empty($_GET['hari'])){
-									$hari = $_POST['hari'];
+                                                                if($cariActive && $bulanPost !== '' && $tahunPost !== ''){
+                                                                        $periode = $bulanPost.'-'.$tahunPost;
+                                                                        $no=1;
+                                                                        $jumlah = 0;
+                                                                        $bayar = 0;
+                                                                        $hasil = $lihat -> periode_jual($periode);
+                                                                }elseif($hariActive && $hariPost !== ''){
+                                                                        $hari = $hariPost;
 									$no=1; 
 									$jumlah = 0;
 									$bayar = 0;
@@ -181,21 +196,21 @@
 									$jumlah += $isi['jumlah'];
 							?>
 							<tr>
-								<td><?php echo $no;?></td>
-								<td><?php echo $isi['id_barang'];?></td>
-								<td><?php echo $isi['nama_barang'];?></td>
-								<td><?php echo $isi['jumlah'];?> </td>
+								<td><?= htmlspecialchars((string) $no, ENT_QUOTES, 'UTF-8');?></td>
+								<td><?= htmlspecialchars($isi['id_barang'], ENT_QUOTES, 'UTF-8');?></td>
+								<td><?= htmlspecialchars($isi['nama_barang'], ENT_QUOTES, 'UTF-8');?></td>
+								<td><?= htmlspecialchars($isi['jumlah'], ENT_QUOTES, 'UTF-8');?> </td>
 								<td>Rp.<?php echo number_format($isi['harga_beli']* $isi['jumlah']);?>,-</td>
 								<td>Rp.<?php echo number_format($isi['total']);?>,-</td>
-								<td><?php echo $isi['nm_member'];?></td>
-								<td><?php echo $isi['tanggal_input'];?></td>
+								<td><?= htmlspecialchars($isi['nm_member'], ENT_QUOTES, 'UTF-8');?></td>
+								<td><?= htmlspecialchars($isi['tanggal_input'], ENT_QUOTES, 'UTF-8');?></td>
 							</tr>
 							<?php $no++; }?>
 						</tbody>
 						<tfoot>
 							<tr>
 								<th colspan="3">Total Terjual</td>
-								<th><?php echo $jumlah;?></td>
+								<th><?= htmlspecialchars($jumlah, ENT_QUOTES, 'UTF-8');?></td>
 								<th>Rp.<?php echo number_format($modal);?>,-</th>
 								<th>Rp.<?php echo number_format($bayar);?>,-</th>
 								<th style="background:#0bb365;color:#fff;">Keuntungan</th>
