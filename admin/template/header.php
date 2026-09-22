@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="sb-admin/css/sb-admin-2.css" rel="stylesheet">
     <!-- DATATABLES BS 4-->
     <link rel="stylesheet" href="sb-admin/vendor/datatables/dataTables.bootstrap4.css" />
     <!-- Bootstrap core JavaScript-->
